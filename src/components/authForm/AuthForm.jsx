@@ -1,11 +1,18 @@
 import React from 'react';
+import { useState } from 'react';
 
-import { Box } from '@chakra-ui/react';
+import { Box, Flex, VStack, Text, Image } from '@chakra-ui/react';
 
 const AuthForm = () => {
+  const [isLogin, setIsLogin] = useState(true);
+
   return (
     <>
-      <Box></Box>
+      <Box>
+        <VStack>
+          <Image src='/logo.png' h={24} cursor={'pointer'} alt='Instagram' />
+        </VStack>
+      </Box>
     </>
   );
 };
