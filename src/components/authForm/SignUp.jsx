@@ -12,10 +12,27 @@ const SignUp = () => {
 
   return (
     <>
-      <Input />
-      <Input />
-      <Input />
-      <Button></Button>
+      <Input
+        placeholder='Email'
+        type='email'
+        size={'sm'}
+        value={inputs.email}
+      />
+      <Input
+        placeholder='Username'
+        type='text'
+        size={'sm'}
+        value={inputs.userName}
+      />
+      <Input
+        placeholder='Full Name'
+        type='text'
+        size={'sm'}
+        value={inputs.fullName}
+      />
+      <Button w={'full'} colorScheme='blue' size={'sm'} fontSize={14}>
+        Sign up
+      </Button>
     </>
   );
 };

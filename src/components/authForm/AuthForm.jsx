@@ -6,7 +6,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 
 const AuthForm = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <>
