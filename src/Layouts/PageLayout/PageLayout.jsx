@@ -3,10 +3,10 @@ import SideBar from '../../components/SideBar/SideBar';
 import { useLocation } from 'react-router-dom';
 
 const PageLayout = ({ children }) => {
-  const { pathName } = useLocation();
+  const { pathname } = useLocation();
   return (
     <Flex>
-      {pathName !== '/auth' ? (
+      {pathname !== '/auth' ? (
         <Box w={{ base: '70px', md: '240px' }}>
           <SideBar />
         </Box>
