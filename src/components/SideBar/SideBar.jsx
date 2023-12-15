@@ -60,20 +60,29 @@ const SideBar = () => {
         </Link>
         <Flex direction={'column'} gap={5} cursor={'pointer'}>
           {sidebarItems.map((item, index) => {
-            <Tooltip
-              key={index}
-              hasArrow
-              label={item.text}
-              placement='right'
-              ml={1}
-              openDelay={500}
-              display={{ base: 'block', md: 'none' }}
-            >
-              <Link display={'flex'} to={item.link || null}>
-                {item.icon}
-              </Link>
-              <Box>{item.text}</Box>
-            </Tooltip>;
+            return (
+              <Tooltip
+                key={index}
+                hasArrow
+                label={item.text}
+                placement='right'
+                ml={1}
+                openDelay={500}
+                display={{ base: 'block', md: 'none' }}
+              >
+                <Link
+                  display={'flex'}
+                  to={item.link || null}
+                  as={RouterLink}
+                  alignItems={'center'}
+                  gap={4}
+                  _hover={{ bg: 'whiteAlpha.400' }}
+                >
+                  {item.icon}
+                  <Box display={{ base: 'none', md: 'block' }}>{item.text}</Box>
+                </Link>
+              </Tooltip>
+            );
           })}
         </Flex>
       </Flex>
