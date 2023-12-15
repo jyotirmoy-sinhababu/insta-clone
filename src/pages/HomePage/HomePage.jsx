@@ -1,10 +1,24 @@
-import React from 'react';
+import { Container, Flex, Box } from '@chakra-ui/react';
+
+import FeedPosts from '../../components/FeedPosts/FeedPosts';
 
 const HomePage = () => {
   return (
-    <div>
-      <h1>hi</h1>
-    </div>
+    <Container maxW={'container.lg'}>
+      <Flex gap={20}>
+        <Box flex={2} py={10}>
+          <FeedPosts />
+        </Box>
+        <Box
+          flex={3}
+          mr={20}
+          display={{ base: 'none', lg: 'block' }}
+          maxW={'300px'}
+        >
+          Suggested
+        </Box>
+      </Flex>
+    </Container>
   );
 };
 
