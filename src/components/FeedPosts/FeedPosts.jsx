@@ -1,5 +1,11 @@
+import FeedPost from './FeedPost';
+
 const FeedPosts = () => {
-  return <div>FeedPosts</div>;
+  return (
+    <div>
+      <FeedPost />
+    </div>
+  );
 };
 
 export default FeedPosts;
