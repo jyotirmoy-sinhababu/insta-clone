@@ -65,7 +65,12 @@ const ProfileHeader = () => {
             Following
           </Text>
         </Flex>
-        <Flex alignItems={'center'} gap={4}></Flex>
+        <Flex alignItems={'center'} gap={4}>
+          <Text fontSize={'sm'} fontWeight={'bold'}>
+            As a programmer
+          </Text>
+        </Flex>
+        <Text fontSize={'sm'}></Text>
       </VStack>
     </Flex>
   );
