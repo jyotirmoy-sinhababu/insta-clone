@@ -1,6 +1,6 @@
 import { Flex, Box, Text } from '@chakra-ui/react';
 
-import { BsGrid3X3Gap } from 'react-icons/bs';
+import { BsGrid3X3Gap, BsBookmarkFill, BsHeart } from 'react-icons/bs';
 
 const ProfileTabs = () => {
   return (
@@ -25,32 +25,20 @@ const ProfileTabs = () => {
           Posts
         </Text>
       </Flex>
-      <Flex
-        borderTop={'1px solid white'}
-        alignItems={'center'}
-        p='3'
-        gap={1}
-        cursor={'pointer'}
-      >
+      <Flex alignItems={'center'} p='3' gap={1} cursor={'pointer'}>
         <Box fontSize={20}>
-          <BsGrid3X3Gap />
+          <BsBookmarkFill />
         </Box>
         <Text fontSize={12} display={{ base: 'none', sm: 'block' }}>
-          Posts
+          Saved{' '}
         </Text>
       </Flex>
-      <Flex
-        borderTop={'1px solid white'}
-        alignItems={'center'}
-        p='3'
-        gap={1}
-        cursor={'pointer'}
-      >
+      <Flex alignItems={'center'} p='3' gap={1} cursor={'pointer'}>
         <Box fontSize={20}>
-          <BsGrid3X3Gap />
+          <BsHeart />
         </Box>
         <Text fontSize={12} display={{ base: 'none', sm: 'block' }}>
-          Posts
+          Likes{' '}
         </Text>
       </Flex>
     </Flex>
