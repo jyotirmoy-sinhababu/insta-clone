@@ -4,6 +4,8 @@ import { useState } from 'react';
 
 const Login = () => {
   const [inputs, setInputs] = useState({ email: '', password: '' });
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <>
       <Input
@@ -18,7 +20,7 @@ const Login = () => {
       />
       <Input
         placeholder='Password'
-        type='password'
+        type={showPassword ? 'text' : 'password'}
         fontSize={14}
         size={'sm'}
         value={inputs.password}
