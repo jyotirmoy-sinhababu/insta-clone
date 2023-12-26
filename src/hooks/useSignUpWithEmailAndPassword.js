@@ -1,5 +1,5 @@
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { auth } from '../firebase/Firebase';
+import { auth, firestore } from '../firebase/Firebase';
 
 const useSignUpWithEmailAndPassword = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -31,14 +31,20 @@ const useSignUpWithEmailAndPassword = () => {
           fullName: inputs.fullName,
           bio: '',
           profilePicUrl: '',
+          followers: '',
+          following: '',
+          posts: [],
+          createdAt: Data.now(),
         };
+        await setDoc(doc(firestore, 'users', newUser.user.uid), userDoc);
+        localStorage.setItem('user-info', JSON.stringify(userDoc));
       }
     } catch (err) {
       console.error(err);
     }
   };
 
-  return;
+  return { loading, error, signUp };
 };
 
 export default useSignUpWithEmailAndPassword;

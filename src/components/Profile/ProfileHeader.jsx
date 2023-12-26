@@ -14,7 +14,7 @@ const ProfileHeader = () => {
         mx={'auto'}
       >
         <Avatar
-          name='as a programmer'
+          name='asaprogrammer'
           src='/profilepic.png'
           alt='As a programmer logo'
         />
