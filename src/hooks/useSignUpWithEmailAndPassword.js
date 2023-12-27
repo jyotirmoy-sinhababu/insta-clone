@@ -4,7 +4,11 @@ import { auth, firestore } from '../firebase/Firebase';
 import { setDoc } from 'firebase/firestore';
 import { doc } from 'firebase/firestore';
 
+import useShowToast from './useShowToast';
+
 const useSignUpWithEmailAndPassword = () => {
+  const showToast = useShowToast;
+
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
@@ -15,7 +19,7 @@ const useSignUpWithEmailAndPassword = () => {
       !inputs.userName ||
       !inputs.fullName
     ) {
-      console.log('Please fill all field');
+      showToast('Error', 'Please all the fields', 'error');
       return;
     }
     try {
@@ -24,7 +28,7 @@ const useSignUpWithEmailAndPassword = () => {
         inputs.password
       );
       if (!newUser && error) {
-        console.log(error);
+        showToast('Error', 'error', 'error');
       }
       if (newUser) {
         const userDoc = {
