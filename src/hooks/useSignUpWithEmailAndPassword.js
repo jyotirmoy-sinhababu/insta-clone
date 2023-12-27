@@ -9,7 +9,7 @@ import useShowToast from './useShowToast';
 const useSignUpWithEmailAndPassword = () => {
   const showToast = useShowToast;
 
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [createUserWithEmailAndPassword, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
   const signUp = async (inputs) => {
@@ -28,7 +28,7 @@ const useSignUpWithEmailAndPassword = () => {
         inputs.password
       );
       if (!newUser && error) {
-        showToast('Error', 'error', 'error');
+        showToast('Error', error.message, 'error');
       }
       if (newUser) {
         const userDoc = {
@@ -47,7 +47,7 @@ const useSignUpWithEmailAndPassword = () => {
         localStorage.setItem('user-info', JSON.stringify(userDoc));
       }
     } catch (err) {
-      console.error(err);
+      showToast('Error', error.message, 'error');
     }
   };
 
