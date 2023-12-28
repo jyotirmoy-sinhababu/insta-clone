@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, Link, Tooltip } from '@chakra-ui/react';
+import { Avatar, Box, Button, Flex, Link, Tooltip } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   CreatePostLogo,
@@ -10,6 +10,8 @@ import {
 
 import { AiFillHome } from 'react-icons/ai';
 import { RiLogoutBoxLine } from 'react-icons/ri';
+
+import useLogout from '../../hooks/useLogout';
 
 const SideBar = () => {
   const sidebarItems = [
@@ -23,6 +25,8 @@ const SideBar = () => {
       link: '/asaprogrammer',
     },
   ];
+
+  const { handleLogOut, isLoggingOut } = useLogout();
 
   return (
     <Box
@@ -94,7 +98,10 @@ const SideBar = () => {
           openDelay={500}
           display={{ base: 'block', md: 'none' }}
         >
-          <Link
+          <Flex
+            onClick={() => {
+              handleLogOut();
+            }}
             display={'flex'}
             to={'/auth'}
             as={RouterLink}
@@ -108,8 +115,15 @@ const SideBar = () => {
             justifyContent={{ base: 'center', md: 'flex-start' }}
           >
             <RiLogoutBoxLine size={25} />
-            <Box display={{ base: 'none', md: 'block' }}>Logout</Box>
-          </Link>
+            <Button
+              display={{ base: 'none', md: 'block' }}
+              variant={'ghost'}
+              _hover={{ bg: 'transparent' }}
+              isLoading={isLoggingOut}
+            >
+              Logout
+            </Button>
+          </Flex>
         </Tooltip>
       </Flex>
     </Box>

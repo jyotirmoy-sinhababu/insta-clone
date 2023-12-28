@@ -3,7 +3,7 @@ import { auth } from '../firebase/Firebase';
 import useShowToast from './useShowToast';
 
 const useLogout = () => {
-  const [signOut, loading, error] = useSignOut(auth);
+  const [signOut, isLoggingOut, error] = useSignOut(auth);
   const showToast = useShowToast();
 
   const handleLogout = async () => {
@@ -14,7 +14,7 @@ const useLogout = () => {
       showToast('Error', error.message, 'error');
     }
   };
-  return handleLogout, loading, error;
+  return handleLogout, isLoggingOut, error;
 };
 
 export default useLogout;
