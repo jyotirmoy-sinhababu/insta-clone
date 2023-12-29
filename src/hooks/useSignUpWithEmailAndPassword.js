@@ -7,11 +7,12 @@ import { doc } from 'firebase/firestore';
 import useShowToast from './useShowToast';
 
 import { useDispatch } from 'react-redux';
+import { login } from '../slice/AuthstateSlice';
 
 const useSignUpWithEmailAndPassword = () => {
   const dispatch = useDispatch();
 
-  const showToast = useShowToast;
+  const showToast = useShowToast();
 
   const [createUserWithEmailAndPassword, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
@@ -49,10 +50,11 @@ const useSignUpWithEmailAndPassword = () => {
         };
         await setDoc(doc(firestore, 'users', newUser.user.uid), userDoc);
         localStorage.setItem('user-info', JSON.stringify(userDoc));
-        dispatch(userDoc);
+        dispatch(login(userDoc));
       }
-    } catch (err) {
+    } catch (error) {
       showToast('Error', error.message, 'error');
+      console.log(error);
     }
   };
 
