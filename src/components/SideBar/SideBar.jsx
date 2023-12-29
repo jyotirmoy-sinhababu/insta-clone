@@ -26,7 +26,7 @@ const SideBar = () => {
     },
   ];
 
-  const { handleLogOut, isLoggingOut } = useLogout();
+  const { handleLogout, isLoggingOut } = useLogout();
 
   return (
     <Box
@@ -99,9 +99,7 @@ const SideBar = () => {
           display={{ base: 'block', md: 'none' }}
         >
           <Flex
-            onClick={() => {
-              handleLogOut();
-            }}
+            onClick={handleLogout}
             display={'flex'}
             to={'/auth'}
             as={RouterLink}

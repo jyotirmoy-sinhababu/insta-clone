@@ -8,6 +8,9 @@ import { mode } from '@chakra-ui/theme-tools';
 
 import { BrowserRouter } from 'react-router-dom';
 
+import { Provider } from 'react-redux';
+import Store from './store/Store.js';
+
 const styles = {
   global: (props) => ({
     body: {
@@ -28,9 +31,11 @@ const theme = extendTheme({ config, styles });
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <ChakraProvider theme={theme}>
-        <App />
-      </ChakraProvider>
+      <Provider store={Store}>
+        <ChakraProvider theme={theme}>
+          <App />
+        </ChakraProvider>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );
