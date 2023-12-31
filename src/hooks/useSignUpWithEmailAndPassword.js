@@ -1,6 +1,6 @@
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth, firestore } from '../firebase/Firebase';
-
+import { useState } from 'react';
 import { setDoc } from 'firebase/firestore';
 import { doc } from 'firebase/firestore';
 
@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../slice/AuthstateSlice';
 
 const useSignUpWithEmailAndPassword = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   const showToast = useShowToast();
@@ -28,6 +29,7 @@ const useSignUpWithEmailAndPassword = () => {
       return;
     }
     try {
+      setIsLoading(true);
       const newUser = await createUserWithEmailAndPassword(
         inputs.email,
         inputs.password
@@ -49,16 +51,18 @@ const useSignUpWithEmailAndPassword = () => {
           createdAt: Date.now(),
         };
         await setDoc(doc(firestore, 'users', newUser.user.uid), userDoc);
+        setIsLoading(false);
         localStorage.setItem('user-info', JSON.stringify(userDoc));
         dispatch(login(userDoc));
       }
     } catch (error) {
       showToast('Error', error.message, 'error');
+      setIsLoading(false);
       console.log(error);
     }
   };
 
-  return { loading, error, signUp };
+  return { loading, error, signUp, isLoading };
 };
 
 export default useSignUpWithEmailAndPassword;

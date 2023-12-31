@@ -10,8 +10,8 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 import { useSelector } from 'react-redux';
 
 function App() {
-  const authState = useSelector((state) => state.user);
-
+  const authState = useSelector((state) => state.auth.user) || '';
+  console.log(authState);
   return (
     <>
       <PageLayout>

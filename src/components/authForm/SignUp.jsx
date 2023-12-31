@@ -22,7 +22,9 @@ const SignUp = () => {
     password: '',
   });
 
-  const { loading, error, signUp } = useSignUpWithEmailAndPassword();
+  const { loading, error, signUp, isLoading } = useSignUpWithEmailAndPassword();
+
+  console.log(useSignUpWithEmailAndPassword());
 
   return (
     <>
@@ -86,7 +88,7 @@ const SignUp = () => {
         colorScheme='blue'
         size={'sm'}
         fontSize={14}
-        isLoading={loading}
+        isLoading={isLoading}
         onClick={() => {
           signUp(inputs);
         }}
