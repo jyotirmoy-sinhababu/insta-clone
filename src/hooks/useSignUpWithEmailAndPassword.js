@@ -3,6 +3,7 @@ import { auth, firestore } from '../firebase/Firebase';
 import { useState } from 'react';
 import { setDoc } from 'firebase/firestore';
 import { doc } from 'firebase/firestore';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 import useShowToast from './useShowToast';
 
@@ -28,6 +29,17 @@ const useSignUpWithEmailAndPassword = () => {
       showToast('Error', 'Please all the fields', 'error');
       return;
     }
+
+    const usersRef = collection(firestore, 'users');
+
+    const q = query(usersRef, where('username', '==', inputs.userName));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      showToast('Error', 'Username already exists', 'error');
+      return;
+    }
+
     try {
       setIsLoading(true);
       const newUser = await createUserWithEmailAndPassword(

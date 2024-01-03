@@ -13,7 +13,7 @@ const PageLayout = ({ children }) => {
   const canRenderNavbar = !authState && pathname !== '/auth';
 
   return (
-    <Flex>
+    <Flex flexDir={canRenderNavbar ? 'column' : 'row'}>
       {canRenderSidebar ? (
         <Box w={{ base: '70px', md: '240px' }}>
           <SideBar />
