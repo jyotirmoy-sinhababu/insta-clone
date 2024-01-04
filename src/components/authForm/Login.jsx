@@ -1,10 +1,5 @@
 import { Input, Button } from '@chakra-ui/react';
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-} from '@chakra-ui/react';
+import { Alert, AlertIcon } from '@chakra-ui/react';
 
 import { useState } from 'react';
 
@@ -14,7 +9,7 @@ const Login = () => {
   const [inputs, setInputs] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
 
-  const { loading, error, login } = uselogin();
+  const { loading, error, loginUser } = uselogin();
 
   return (
     <>
@@ -25,7 +20,7 @@ const Login = () => {
         size={'sm'}
         value={inputs.email}
         onChange={(e) => {
-          setInputs({ ...inputs, email: e.target.email });
+          setInputs({ ...inputs, email: e.target.value });
         }}
       />
       <Input
@@ -35,7 +30,7 @@ const Login = () => {
         size={'sm'}
         value={inputs.password}
         onChange={(e) => {
-          setInputs({ ...inputs, email: e.target.password });
+          setInputs({ ...inputs, password: e.target.value });
         }}
       />
       {error && (
@@ -51,7 +46,7 @@ const Login = () => {
         fontSize={14}
         isLoading={loading}
         onClick={() => {
-          login(inputs);
+          loginUser(inputs);
         }}
       >
         Log in

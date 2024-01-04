@@ -7,12 +7,12 @@ import { login } from '../slice/AuthstateSlice';
 import { useDispatch } from 'react-redux';
 
 const uselogin = () => {
-  const showToast = useShowToast();
   const [signInWithEmailAndPassword, loading, error] =
     useSignInWithEmailAndPassword(auth);
+  const showToast = useShowToast();
 
   const loginUser = async (inputs) => {
-    if (inputs.email || inputs.password) {
+    if (!inputs.email || !inputs.password) {
       return showToast('Error', 'Please fill all field', 'error');
     }
     try {
@@ -28,10 +28,11 @@ const uselogin = () => {
       }
     } catch (error) {
       showToast('Error', error.message, 'error');
+      console.log(error);
     }
   };
 
-  return { loading, error, login };
+  return { loading, error, loginUser };
 };
 
 export default uselogin;

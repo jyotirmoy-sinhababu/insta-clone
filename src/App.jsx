@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux';
 
 function App() {
   const authState = useSelector((state) => state.auth.user) || '';
-  console.log(authState);
   return (
     <>
       <PageLayout>
