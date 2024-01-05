@@ -1,4 +1,11 @@
-import { Avatar, AvatarGroup, Button, Flex, VStack } from '@chakra-ui/react';
+import {
+  Avatar,
+  AvatarGroup,
+  Button,
+  Flex,
+  VStack,
+  Text,
+} from '@chakra-ui/react';
 
 const ProfileHeader = () => {
   return (
