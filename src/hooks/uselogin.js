@@ -11,6 +11,8 @@ const uselogin = () => {
     useSignInWithEmailAndPassword(auth);
   const showToast = useShowToast();
 
+  const dispatch = useDispatch();
+
   const loginUser = async (inputs) => {
     if (!inputs.email || !inputs.password) {
       return showToast('Error', 'Please fill all field', 'error');
@@ -24,7 +26,7 @@ const uselogin = () => {
         const docRef = doc(firestore, 'users', userCred.user.uid);
         const docSnap = await getDoc(docRef);
         localStorage.setItem('user-info', JSON.stringify(docSnap.data()));
-        useDispatch(login(docSnap.data()));
+        dispatch(login(docSnap.data()));
       }
     } catch (error) {
       showToast('Error', error.message, 'error');
