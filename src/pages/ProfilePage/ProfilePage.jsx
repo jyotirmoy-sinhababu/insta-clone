@@ -1,9 +1,21 @@
-import { Container, Flex } from '@chakra-ui/react';
+import { Container, Flex, Text, Link } from '@chakra-ui/react';
 import ProfileHeader from '../../components/Profile/ProfileHeader';
 import ProfileTabs from '../../components/Profile/ProfileTabs';
 import ProfilePosts from '../../components/Profile/ProfilePosts';
 
+import useGetUserProfileByUsername from '../../hooks/useGetUserProfileByUsername';
+
+import { useParams } from 'react-router-dom';
+
 const ProfilePage = () => {
+  const { username } = useParams();
+  const { isLoading, profileName } = useGetUserProfileByUsername(username);
+
+  const userNotFound = !isLoading && !profileName;
+  if (userNotFound) {
+    return <UserNotFond />;
+  }
+
   return (
     <Container maxW='container.lg' py={5}>
       <Flex
@@ -32,3 +44,20 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
+const UserNotFond = () => {
+  return (
+    <Flex flexDir='column' textAlign={'center'} mx={'auto'}>
+      <Text fontSize={'2xl'}>User Not Fond</Text>
+      <Link
+        as={RouterLink}
+        to={'/'}
+        color={'blue.500'}
+        w={'max-content'}
+        mx={'auto'}
+      >
+        Go home
+      </Link>
+    </Flex>
+  );
+};

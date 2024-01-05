@@ -12,9 +12,7 @@ const useGetUserProfileByUsername = (username) => {
   const [isLoading, setIsLoading] = useState(true);
   const showToast = useShowToast();
   const dispatch = useDispatch();
-  const profileName = useSelector(
-    (state) => state.userProfileReducer.userProfile
-  );
+  const profileName = useSelector((state) => state.profile.userProfile);
 
   useEffect(() => {
     const getUserProfile = async () => {
