@@ -6,11 +6,14 @@ const UserProfileSlice = createSlice({
     userProfile: null,
   },
   reducers: {
-    headerData: (state, action) => {
+    userPresent: (state, action) => {
       state.userProfile = action.payload;
+    },
+    userAbsent: (state) => {
+      state.userProfile = null;
     },
   },
 });
 
-export const { headerData } = UserProfileSlice.actions;
+export const { userPresent, userAbsent } = UserProfileSlice.actions;
 export default UserProfileSlice.reducer;

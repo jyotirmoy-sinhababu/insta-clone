@@ -5,14 +5,13 @@ import useShowToast from './useShowToast';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { firestore } from '../firebase/Firebase';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { headerData } from '../slice/UserProfileSlice';
+import { useDispatch } from 'react-redux';
+import { userPresent, userAbsent } from '../slice/UserProfileSlice';
 
 const useGetUserProfileByUsername = (username) => {
   const [isLoading, setIsLoading] = useState(true);
   const showToast = useShowToast();
   const dispatch = useDispatch();
-  const profileName = useSelector((state) => state.profile.userProfile);
 
   useEffect(() => {
     const getUserProfile = async () => {
@@ -20,29 +19,28 @@ const useGetUserProfileByUsername = (username) => {
       try {
         const q = query(
           collection(firestore, 'users'),
-          where('username', '==', username)
+          where('userName', '==', username)
         );
         const querySnapshot = await getDocs(q);
 
         if (querySnapshot.empty) {
-          return dispatch(headerData(null));
+          return dispatch(userAbsent());
         }
 
         let userDoc;
         querySnapshot.forEach((doc) => {
           userDoc = doc.data();
         });
-        dispatch(headerData(userDoc));
+        dispatch(userPresent(userDoc));
         console.log(userDoc);
       } catch (error) {
         showToast('Error', error.message, 'error');
-      } finally {
-        setIsLoading(false);
+        console.log(error);
       }
     };
     getUserProfile();
-  }, []);
-  return { isLoading, profileName };
+  }, [username]);
+  return { isLoading };
 };
 
 export default useGetUserProfileByUsername;

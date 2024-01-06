@@ -10,11 +10,9 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const ProfilePage = () => {
   const { username } = useParams();
-  const { isLoading, profileName } = useGetUserProfileByUsername(username);
+  const { isLoading } = useGetUserProfileByUsername(username);
 
-  console.log(isLoading);
-
-  const userNotFound = !isLoading && !profileName;
+  const userNotFound = !isLoading;
   if (userNotFound) {
     return <UserNotFond />;
   }
