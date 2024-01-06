@@ -6,10 +6,13 @@ import ProfilePosts from '../../components/Profile/ProfilePosts';
 import useGetUserProfileByUsername from '../../hooks/useGetUserProfileByUsername';
 
 import { useParams } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 const ProfilePage = () => {
   const { username } = useParams();
   const { isLoading, profileName } = useGetUserProfileByUsername(username);
+
+  console.log(isLoading);
 
   const userNotFound = !isLoading && !profileName;
   if (userNotFound) {

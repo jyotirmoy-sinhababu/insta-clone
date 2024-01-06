@@ -33,8 +33,11 @@ const useGetUserProfileByUsername = (username) => {
           userDoc = doc.data();
         });
         dispatch(headerData(userDoc));
+        console.log(userDoc);
       } catch (error) {
         showToast('Error', error.message, 'error');
+      } finally {
+        setIsLoading(false);
       }
     };
     getUserProfile();
