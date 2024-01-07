@@ -8,9 +8,12 @@ import useGetUserProfileByUsername from '../../hooks/useGetUserProfileByUsername
 import { useParams } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
+
 const ProfilePage = () => {
   const { username } = useParams();
   const { isLoading } = useGetUserProfileByUsername(username);
+  const userdata = useSelector((state) => state.profile.userProfile);
 
   const userNotFound = !isLoading;
   if (userNotFound) {
@@ -27,7 +30,7 @@ const ProfilePage = () => {
         mx={'auto'}
         flexDirection={'column'}
       >
-        <ProfileHeader />
+        {userdata ? <ProfileHeader /> : null}
       </Flex>
       <Flex
         px={{ base: 2, sm: 4 }}

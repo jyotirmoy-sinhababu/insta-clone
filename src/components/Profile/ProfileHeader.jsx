@@ -7,7 +7,10 @@ import {
   Text,
 } from '@chakra-ui/react';
 
+import { useSelector } from 'react-redux';
+
 const ProfileHeader = () => {
+  const userdata = useSelector((state) => state.profile.userProfile);
   return (
     <Flex
       gap={{ base: 4, sm: 10 }}
@@ -20,11 +23,7 @@ const ProfileHeader = () => {
         alignSelf={'flex-start'}
         mx={'auto'}
       >
-        <Avatar
-          name='asaprogrammer'
-          src='/profilepic.png'
-          alt='As a programmer logo'
-        />
+        <Avatar src={userdata.profilePicUrl} alt='As a programmer logo' />
       </AvatarGroup>
       <VStack alignItems={'start'} gap={2} mx={'auto'} flex={1}>
         <Flex
@@ -34,7 +33,7 @@ const ProfileHeader = () => {
           alignItems={'center'}
           w={'full'}
         >
-          <Text fontSize={{ base: 'sm', md: 'lg' }}>asaprogrammer</Text>
+          <Text fontSize={{ base: 'sm', md: 'lg' }}>{userdata.userName}</Text>
           <Flex gap={4} alignItems={'center'} justifyContent={'center'}>
             <Button
               bg={'white'}
@@ -55,26 +54,26 @@ const ProfileHeader = () => {
         >
           <Text>
             <Text as='span' fontWeight={'bold'} mr={1}>
-              4
+              {userdata.posts.length}
             </Text>
             Posts
           </Text>
           <Text>
             <Text as='span' fontWeight={'bold'} mr={1}>
-              149
+              {userdata.followers}
             </Text>
             Followers
           </Text>
           <Text>
             <Text as='span' fontWeight={'bold'} mr={1}>
-              149
+              {userdata.following}
             </Text>
             Following
           </Text>
         </Flex>
         <Flex alignItems={'center'} gap={4}>
           <Text fontSize={'sm'} fontWeight={'bold'}>
-            As a programmer
+            {userdata.fullName}
           </Text>
         </Flex>
         <Text fontSize={'sm'}></Text>
