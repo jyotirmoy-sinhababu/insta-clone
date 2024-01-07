@@ -16,6 +16,7 @@ const useGetUserProfileByUsername = (username) => {
   useEffect(() => {
     const getUserProfile = async () => {
       setIsLoading(true);
+
       try {
         const q = query(
           collection(firestore, 'users'),
