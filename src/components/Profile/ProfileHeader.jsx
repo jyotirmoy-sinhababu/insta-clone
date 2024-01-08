@@ -11,6 +11,14 @@ import { useSelector } from 'react-redux';
 
 const ProfileHeader = () => {
   const userdata = useSelector((state) => state.profile.userProfile);
+  const authUser = useSelector((state) => state.auth.user);
+
+  const visitingOwnProfile =
+    authUser && authUser.userName === userdata.userName;
+
+  const visitingAnotherProfile =
+    authUser && authUser.userName !== userdata.userName;
+
   return (
     <Flex
       gap={{ base: 4, sm: 10 }}
@@ -34,16 +42,30 @@ const ProfileHeader = () => {
           w={'full'}
         >
           <Text fontSize={{ base: 'sm', md: 'lg' }}>{userdata.userName}</Text>
-          <Flex gap={4} alignItems={'center'} justifyContent={'center'}>
-            <Button
-              bg={'white'}
-              color={'black'}
-              _hover={{ bg: 'whiteAlpha.800' }}
-              size={{ base: 'xs', md: 'sm' }}
-            >
-              Edit Profile
-            </Button>
-          </Flex>
+          {visitingOwnProfile && (
+            <Flex gap={4} alignItems={'center'} justifyContent={'center'}>
+              <Button
+                bg={'white'}
+                color={'black'}
+                _hover={{ bg: 'whiteAlpha.800' }}
+                size={{ base: 'xs', md: 'sm' }}
+              >
+                Edit Profile
+              </Button>
+            </Flex>
+          )}
+          {visitingAnotherProfile && (
+            <Flex gap={4} alignItems={'center'} justifyContent={'center'}>
+              <Button
+                bg={'white'}
+                color={'black'}
+                _hover={{ bg: 'whiteAlpha.800' }}
+                size={{ base: 'xs', md: 'sm' }}
+              >
+                Follow
+              </Button>
+            </Flex>
+          )}
         </Flex>
         <Flex
           alignItems={'center'}
@@ -60,13 +82,13 @@ const ProfileHeader = () => {
           </Text>
           <Text>
             <Text as='span' fontWeight={'bold'} mr={1}>
-              {userdata.followers}
+              {userdata.followers.length}
             </Text>
             Followers
           </Text>
           <Text>
             <Text as='span' fontWeight={'bold'} mr={1}>
-              {userdata.following}
+              {userdata.following.length}
             </Text>
             Following
           </Text>
