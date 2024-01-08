@@ -18,25 +18,25 @@ const useGetUserProfileByUsername = (username) => {
       setIsLoading(true);
 
       try {
-        debugger;
         const q = query(
           collection(firestore, 'users'),
           where('userName', '==', username)
         );
         const querySnapshot = await getDocs(q);
-        // if (querySnapshot.empty) {
-        //   return dispatch(userAbsent());
-        // }
+        if (querySnapshot.empty) {
+          return dispatch(userAbsent());
+        }
 
         let userDoc;
         querySnapshot.forEach((doc) => {
           userDoc = doc.data();
         });
         dispatch(userPresent(userDoc));
-        console.log(userDoc);
       } catch (error) {
         showToast('Error', error.message, 'error');
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getUserProfile();

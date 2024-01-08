@@ -15,7 +15,7 @@ const ProfilePage = () => {
   const { isLoading } = useGetUserProfileByUsername(username);
   const userdata = useSelector((state) => state.profile.userProfile);
 
-  const userNotFound = !isLoading;
+  const userNotFound = !isLoading && userdata;
   if (userNotFound) {
     return <UserNotFond />;
   }
