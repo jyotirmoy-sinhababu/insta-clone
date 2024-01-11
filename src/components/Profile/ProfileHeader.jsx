@@ -18,10 +18,10 @@ const ProfileHeader = () => {
   const authUser = useSelector((state) => state.auth.user);
 
   const visitingOwnProfile =
-    authUser && authUser.userName !== userdata.userName;
+    authUser && authUser.userName === userdata.userName;
 
   const visitingAnotherProfile =
-    authUser && authUser.userName === userdata.userName;
+    authUser && authUser.userName !== userdata.userName;
 
   return (
     <Flex
