@@ -16,7 +16,18 @@ import {
   Stack,
 } from '@chakra-ui/react';
 
+import { useState } from 'react';
+
+import { useSelector } from 'react-redux';
+
 const EditProfile = ({ isOpen, onClose }) => {
+  const [inputs, setInputs] = useState({
+    fullName: '',
+    userName: '',
+    bio: '',
+  });
+
+  const authUser = useSelector((state) => state.auth.user);
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -47,7 +58,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                     <Center>
                       <Avatar
                         size='xl'
-                        src={selectedFile || authUser.profilePicURL}
+                        // src={selectedFile || authUser.profilePicURL}
                         border={'2px solid white '}
                       />
                     </Center>
@@ -58,9 +69,9 @@ const EditProfile = ({ isOpen, onClose }) => {
                     </Center>
                     <Input
                       type='file'
-                      hidden
-                      ref={fileRef}
-                      onChange={handleImageChange}
+                      // hidden
+                      // ref={fileRef}
+                      onChange={{}}
                     />
                   </Stack>
                 </FormControl>
@@ -121,8 +132,8 @@ const EditProfile = ({ isOpen, onClose }) => {
                     size='sm'
                     w='full'
                     _hover={{ bg: 'blue.500' }}
-                    onClick={handleEditProfile}
-                    isLoading={isUpdating}
+                    onClick={{}}
+                    isLoading={false}
                   >
                     Submit
                   </Button>

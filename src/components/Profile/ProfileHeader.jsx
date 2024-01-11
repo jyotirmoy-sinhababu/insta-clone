@@ -5,19 +5,23 @@ import {
   Flex,
   VStack,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react';
 
 import { useSelector } from 'react-redux';
+import EditProfile from './EditProfile';
 
 const ProfileHeader = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const userdata = useSelector((state) => state.profile.userProfile);
   const authUser = useSelector((state) => state.auth.user);
 
   const visitingOwnProfile =
-    authUser && authUser.userName === userdata.userName;
+    authUser && authUser.userName !== userdata.userName;
 
   const visitingAnotherProfile =
-    authUser && authUser.userName !== userdata.userName;
+    authUser && authUser.userName === userdata.userName;
 
   return (
     <Flex
@@ -49,6 +53,7 @@ const ProfileHeader = () => {
                 color={'black'}
                 _hover={{ bg: 'whiteAlpha.800' }}
                 size={{ base: 'xs', md: 'sm' }}
+                onClick={onOpen}
               >
                 Edit Profile
               </Button>
@@ -100,6 +105,7 @@ const ProfileHeader = () => {
         </Flex>
         <Text fontSize={'sm'}></Text>
       </VStack>
+      {isOpen && <EditProfile isOpen={isOpen} onClose={onClose} />}
     </Flex>
   );
 };
