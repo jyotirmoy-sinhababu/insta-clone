@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 
 const SideBar = () => {
   const authUser = useSelector((state) => state.auth.user);
+
   const sidebarItems = [
     { icon: <AiFillHome size={25} />, text: 'Home', link: '/' },
     { icon: <SearchLogo />, text: 'Search' },
