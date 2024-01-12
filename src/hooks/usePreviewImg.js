@@ -9,7 +9,7 @@ const usePreviewImg = () => {
   const handleImg = (e) => {
     const file = e.target.files[0];
 
-    if (file.size && file.type.startWith('image/')) {
+    if (file.size && file.type.startsWith('image/')) {
       if (file > maxImgSize) {
         showToast('Error', 'image size should not be more than 2MB', 'error');
         setSelectedFile(null);

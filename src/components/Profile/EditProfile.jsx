@@ -61,7 +61,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                     <Center>
                       <Avatar
                         size='xl'
-                        // src={selectedFile || authUser.profilePicURL}
+                        src={selectedFile || authUser.profilePicURL}
                         border={'2px solid white '}
                       />
                     </Center>
@@ -135,7 +135,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                     size='sm'
                     w='full'
                     _hover={{ bg: 'blue.500' }}
-                    onClick={{}}
+                    // onClick={{}}
                     isLoading={false}
                   >
                     Submit
