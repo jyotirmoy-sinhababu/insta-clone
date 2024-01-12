@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react';
 
 import { useState, useRef } from 'react';
+import usePreviewImg from '../../hooks/usePreviewImg';
 
 import { useSelector } from 'react-redux';
 
@@ -27,6 +28,7 @@ const EditProfile = ({ isOpen, onClose }) => {
     bio: '',
   });
   const fileRef = useRef();
+  const { selectedFile, setSelectedFile, handleImg } = usePreviewImg();
 
   const authUser = useSelector((state) => state.auth.user);
   return (
@@ -68,7 +70,12 @@ const EditProfile = ({ isOpen, onClose }) => {
                         Edit Profile Picture
                       </Button>
                     </Center>
-                    <Input type='file' hidden ref={fileRef} onChange={{}} />
+                    <Input
+                      type='file'
+                      hidden
+                      ref={fileRef}
+                      onChange={handleImg}
+                    />
                   </Stack>
                 </FormControl>
 
@@ -91,9 +98,9 @@ const EditProfile = ({ isOpen, onClose }) => {
                     placeholder={'Username'}
                     size={'sm'}
                     type={'text'}
-                    value={inputs.username || authUser.username}
+                    value={inputs.userName || authUser.userName}
                     onChange={(e) =>
-                      setInputs({ ...inputs, username: e.target.value })
+                      setInputs({ ...inputs, userName: e.target.value })
                     }
                   />
                 </FormControl>

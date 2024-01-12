@@ -13,21 +13,14 @@ import { RiLogoutBoxLine } from 'react-icons/ri';
 
 import useLogout from '../../hooks/useLogout';
 
-import { useSelector } from 'react-redux';
+import ProfileLink from './ProfileLink';
 
 const SideBar = () => {
-  const authUser = useSelector((state) => state.auth.user);
-
   const sidebarItems = [
     { icon: <AiFillHome size={25} />, text: 'Home', link: '/' },
     { icon: <SearchLogo />, text: 'Search' },
     { icon: <NotificationsLogo />, text: 'Notifications' },
     { icon: <CreatePostLogo />, text: 'Create' },
-    {
-      icon: <Avatar size={'sm'} name='tunir ma' src='/profilepic.png' />,
-      text: 'Profile',
-      link: '/authUser',
-    },
   ];
 
   const { handleLogout, isLoggingOut } = useLogout();
@@ -93,6 +86,7 @@ const SideBar = () => {
               </Tooltip>
             );
           })}
+          <ProfileLink />
         </Flex>
         <Tooltip
           hasArrow
