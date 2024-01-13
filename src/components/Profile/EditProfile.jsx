@@ -18,6 +18,8 @@ import {
 
 import { useState, useRef } from 'react';
 import usePreviewImg from '../../hooks/usePreviewImg';
+import useEditProfile from '../../hooks/useEditProfile';
+import useShowToast from '../../hooks/useShowToast';
 
 import { useSelector } from 'react-redux';
 
@@ -28,9 +30,24 @@ const EditProfile = ({ isOpen, onClose }) => {
     bio: '',
   });
   const fileRef = useRef();
-  const { selectedFile, setSelectedFile, handleImg } = usePreviewImg();
+
+  const { selectedFile, handleImg, setSelectedFile } = usePreviewImg();
+  const { isUpdating, editProfile } = useEditProfile();
+  const showToast = useShowToast();
 
   const authUser = useSelector((state) => state.auth.user);
+
+  const handleEditProfile = async () => {
+    try {
+      await editProfile(inputs, selectedFile);
+      setSelectedFile(null);
+      onClose();
+    } catch (error) {
+      showToast('Error', error.message, 'error');
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -135,8 +152,8 @@ const EditProfile = ({ isOpen, onClose }) => {
                     size='sm'
                     w='full'
                     _hover={{ bg: 'blue.500' }}
-                    // onClick={{}}
-                    isLoading={false}
+                    onClick={handleEditProfile}
+                    isLoading={isUpdating}
                   >
                     Submit
                   </Button>

@@ -1,10 +1,17 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../slice/AuthstateSlice';
+import { userPresent } from '../slice/UserProfileSlice';
+
 import useShowToast from './useShowToast';
 
 const useEditProfile = () => {
   const [isUpdating, setIsUpdating] = useState(false);
   const authUser = useSelector((state) => state.auth.user);
+
+  const dispatch = useDispatch();
+
   const showToast = useShowToast();
   const editProfile = async (inputs, selectedFile) => {
     if (isUpdating || !authUser) return;
@@ -30,11 +37,13 @@ const useEditProfile = () => {
 
       await updateDoc(userDocRef, updatedUser);
       localStorage.setItem('user-info', JSON.stringify(updatedUser));
-      setAuthUser(updatedUser);
-      setUserProfile(updatedUser);
+      dispatch(login(updatedUser));
+      dispatch(userPresent(updatedUser));
+
       showToast('Success', 'Profile updated successfully', 'success');
     } catch (error) {
       showToast('Error', error.message, 'error');
+      console.log(error);
     }
   };
 
