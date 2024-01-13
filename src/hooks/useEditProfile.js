@@ -4,6 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../slice/AuthstateSlice';
 import { userPresent } from '../slice/UserProfileSlice';
 
+import { getDownloadURL, ref, uploadString } from 'firebase/storage';
+import { firestore, storage } from '../firebase/Firebase';
+import { doc, updateDoc } from 'firebase/firestore';
+
 import useShowToast from './useShowToast';
 
 const useEditProfile = () => {
