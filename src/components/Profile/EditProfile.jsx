@@ -16,6 +16,8 @@ import {
   Stack,
 } from '@chakra-ui/react';
 
+import { FaUser } from 'react-icons/fa';
+
 import { useState, useRef } from 'react';
 import usePreviewImg from '../../hooks/usePreviewImg';
 import useEditProfile from '../../hooks/useEditProfile';
@@ -78,7 +80,9 @@ const EditProfile = ({ isOpen, onClose }) => {
                     <Center>
                       <Avatar
                         size='xl'
-                        src={selectedFile || authUser.profilePicURL || ''}
+                        src={
+                          selectedFile || authUser.profilePicURL || <FaUser />
+                        }
                         border={'2px solid white '}
                       />
                     </Center>

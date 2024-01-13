@@ -5,13 +5,14 @@ import useShowToast from './useShowToast';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { firestore } from '../firebase/Firebase';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userPresent, userAbsent } from '../slice/UserProfileSlice';
 
 const useGetUserProfileByUsername = (username) => {
   const [isLoading, setIsLoading] = useState(true);
   const showToast = useShowToast();
   const dispatch = useDispatch();
+  const authUser = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     const getUserProfile = async () => {
@@ -40,7 +41,7 @@ const useGetUserProfileByUsername = (username) => {
       }
     };
     getUserProfile();
-  }, [username]);
+  }, [username, authUser]);
   return { isLoading };
 };
 
