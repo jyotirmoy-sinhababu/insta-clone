@@ -35,7 +35,7 @@ const ProfileHeader = () => {
         alignSelf={'flex-start'}
         mx={'auto'}
       >
-        <Avatar src={userdata.profilePicUrl} alt='As a programmer logo' />
+        <Avatar src={userdata.profilePicUrl} alt='profile pic' />
       </AvatarGroup>
       <VStack alignItems={'start'} gap={2} mx={'auto'} flex={1}>
         <Flex
@@ -103,7 +103,7 @@ const ProfileHeader = () => {
             {userdata.fullName}
           </Text>
         </Flex>
-        <Text fontSize={'sm'}></Text>
+        <Text fontSize={'sm'}>{userdata.bio}</Text>
       </VStack>
       {isOpen && <EditProfile isOpen={isOpen} onClose={onClose} />}
     </Flex>

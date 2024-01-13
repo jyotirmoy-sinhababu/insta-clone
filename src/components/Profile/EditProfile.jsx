@@ -78,7 +78,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                     <Center>
                       <Avatar
                         size='xl'
-                        src={selectedFile || authUser.profilePicURL}
+                        src={selectedFile || authUser.profilePicURL || ''}
                         border={'2px solid white '}
                       />
                     </Center>
