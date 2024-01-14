@@ -11,11 +11,17 @@ import {
 import { useSelector } from 'react-redux';
 import EditProfile from './EditProfile';
 
+import useFollowUser from '../../hooks/useEditProfile';
+
 const ProfileHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const userdata = useSelector((state) => state.profile.userProfile);
   const authUser = useSelector((state) => state.auth.user);
+
+  const { isUpdating, isFollowing, handleFollowUser } = useFollowUser(
+    userdata?.uid
+  );
 
   const visitingOwnProfile =
     authUser && authUser.userName === userdata.userName;
@@ -66,8 +72,10 @@ const ProfileHeader = () => {
                 color={'black'}
                 _hover={{ bg: 'whiteAlpha.800' }}
                 size={{ base: 'xs', md: 'sm' }}
+                onClick={handleFollowUser}
+                isLoading={isUpdating}
               >
-                Follow
+                {isFollowing ? 'Unfollow' : 'Follow'}
               </Button>
             </Flex>
           )}
