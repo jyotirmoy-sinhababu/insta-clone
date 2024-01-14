@@ -9,9 +9,11 @@ import { arrayRemove, arrayUnion, updateDoc } from 'firebase/firestore';
 const useFollowUser = (userId) => {
   const [isUpdating, setIsUpdating] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
+
   const dispatch = useDispatch();
   const authUser = useSelector((state) => state.auth.user);
   const profileUser = useSelector((state) => state.profile.userProfile);
+
   const showToast = useShowToast();
 
   const handleFollowUser = async () => {
@@ -29,8 +31,59 @@ const useFollowUser = (userId) => {
           ? arrayRemove(authUser.uid)
           : arrayUnion(authUser.uid),
       });
+
+      if (isFollowing) {
+        //unfollow logic
+        dispatch(
+          login({
+            ...authUser,
+            following: authUser.following.filter((uid) => uid !== userId),
+          })
+        );
+        dispatch(
+          userPresent({
+            ...profileUser,
+            followers: profileUser.followers.filter(
+              (uid) => uid !== authUser.uid
+            ),
+          })
+        );
+        localStorage.setItem(
+          'user-info',
+          JSON.stringify({
+            ...authUser,
+            following: authUser.following.filter((uid) => uid !== userId),
+          })
+        );
+        setIsFollowing(false);
+      } else {
+        dispatch(
+          login({
+            ...authUser,
+            following: [...authUser.following, userId],
+          })
+        );
+
+        dispatch(
+          userPresent({
+            ...profileUser,
+            followers: [...profileUser.followers, authUser.uid],
+          })
+        );
+
+        localStorage.setItem(
+          'user-info',
+          JSON.stringify({
+            ...authUser,
+            following: [...authUser.following, userId],
+          })
+        );
+        setIsFollowing(true);
+      }
     } catch (error) {
       showToast('Error', error.message, 'error');
+    } finally {
+      setIsUpdating(false);
     }
   };
 
@@ -40,6 +93,7 @@ const useFollowUser = (userId) => {
       setIsFollowing(isFollowing);
     }
   }, [authUser, userId]);
+  return { isUpdating, isFollowing, handleFollowUser };
 };
 
 export default useFollowUser;
