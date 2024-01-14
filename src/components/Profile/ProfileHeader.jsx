@@ -11,7 +11,7 @@ import {
 import { useSelector } from 'react-redux';
 import EditProfile from './EditProfile';
 
-import useFollowUser from '../../hooks/useEditProfile';
+import useFollowUser from '../../hooks/useFollowUser';
 
 const ProfileHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -19,15 +19,15 @@ const ProfileHeader = () => {
   const userdata = useSelector((state) => state.profile.userProfile);
   const authUser = useSelector((state) => state.auth.user);
 
-  const { isUpdating, isFollowing, handleFollowUser } = useFollowUser(
-    userdata?.uid
-  );
-
   const visitingOwnProfile =
     authUser && authUser.userName === userdata.userName;
 
   const visitingAnotherProfile =
     authUser && authUser.userName !== userdata.userName;
+
+  const { isUpdating, isFollowing, handleFollowUser } = useFollowUser(
+    userdata?.uid
+  );
 
   return (
     <Flex

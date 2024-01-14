@@ -4,19 +4,21 @@ import { login } from '../slice/AuthstateSlice';
 import { userPresent } from '../slice/UserProfileSlice';
 import { firestore } from '../firebase/Firebase';
 import useShowToast from './useShowToast';
-import { arrayRemove, arrayUnion, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, updateDoc, doc } from 'firebase/firestore';
 
 const useFollowUser = (userId) => {
+  //state hooks
   const [isUpdating, setIsUpdating] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
-
+  //redux related
   const dispatch = useDispatch();
   const authUser = useSelector((state) => state.auth.user);
   const profileUser = useSelector((state) => state.profile.userProfile);
-
+  //custom hook
   const showToast = useShowToast();
 
   const handleFollowUser = async () => {
+    debugger;
     setIsUpdating(true);
     try {
       const currentUserRef = doc(firestore, 'users', authUser.uid);
@@ -82,13 +84,14 @@ const useFollowUser = (userId) => {
       }
     } catch (error) {
       showToast('Error', error.message, 'error');
+      console.log(error);
     } finally {
       setIsUpdating(false);
     }
   };
 
   useEffect(() => {
-    if (authUser) {
+    if (authUser && authUser.following) {
       const isFollowing = authUser.following.includes(userId);
       setIsFollowing(isFollowing);
     }
