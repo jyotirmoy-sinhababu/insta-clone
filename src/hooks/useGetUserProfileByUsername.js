@@ -12,7 +12,6 @@ const useGetUserProfileByUsername = (username) => {
   const [isLoading, setIsLoading] = useState(true);
   const showToast = useShowToast();
   const dispatch = useDispatch();
-  const authUser = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     const getUserProfile = async () => {
@@ -41,7 +40,7 @@ const useGetUserProfileByUsername = (username) => {
       }
     };
     getUserProfile();
-  }, [username, authUser]);
+  }, [username]);
   return { isLoading };
 };
 

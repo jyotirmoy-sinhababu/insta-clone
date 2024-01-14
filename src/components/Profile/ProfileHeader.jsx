@@ -18,7 +18,6 @@ const ProfileHeader = () => {
 
   const userdata = useSelector((state) => state.profile.userProfile);
   const authUser = useSelector((state) => state.auth.user);
-
   const visitingOwnProfile =
     authUser && authUser.userName === userdata.userName;
 
