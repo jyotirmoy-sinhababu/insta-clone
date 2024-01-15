@@ -8,7 +8,6 @@ import {
   SearchLogo,
 } from '../../assets/Constants';
 
-import { AiFillHome } from 'react-icons/ai';
 import { RiLogoutBoxLine } from 'react-icons/ri';
 
 import useLogout from '../../hooks/useLogout';
@@ -17,7 +16,6 @@ import ProfileLink from './ProfileLink';
 
 const SideBar = () => {
   const sidebarItems = [
-    { icon: <AiFillHome size={25} />, text: 'Home', link: '/' },
     { icon: <SearchLogo />, text: 'Search' },
     { icon: <NotificationsLogo />, text: 'Notifications' },
     { icon: <CreatePostLogo />, text: 'Create' },
