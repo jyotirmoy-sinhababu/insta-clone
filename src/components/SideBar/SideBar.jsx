@@ -1,26 +1,15 @@
 import { Avatar, Box, Button, Flex, Link, Tooltip } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import {
-  CreatePostLogo,
-  InstagramLogo,
-  InstagramMobileLogo,
-  NotificationsLogo,
-  SearchLogo,
-} from '../../assets/Constants';
+import { InstagramLogo, InstagramMobileLogo } from '../../assets/Constants';
 
 import { RiLogoutBoxLine } from 'react-icons/ri';
 
 import useLogout from '../../hooks/useLogout';
 
 import ProfileLink from './ProfileLink';
+import SidebarItems from './SidebarItems';
 
 const SideBar = () => {
-  const sidebarItems = [
-    { icon: <SearchLogo />, text: 'Search' },
-    { icon: <NotificationsLogo />, text: 'Notifications' },
-    { icon: <CreatePostLogo />, text: 'Create' },
-  ];
-
   const { handleLogout, isLoggingOut } = useLogout();
 
   return (
@@ -59,32 +48,7 @@ const SideBar = () => {
           <InstagramMobileLogo />
         </Link>
         <Flex direction={'column'} gap={5} cursor={'pointer'}>
-          {sidebarItems.map((item, index) => {
-            return (
-              <Tooltip
-                key={index}
-                hasArrow
-                label={item.text}
-                placement='right'
-                ml={1}
-                openDelay={500}
-                display={{ base: 'block', md: 'none' }}
-              >
-                <Link
-                  display={'flex'}
-                  to={item.link || null}
-                  as={RouterLink}
-                  alignItems={'center'}
-                  gap={4}
-                  _hover={{ bg: 'whiteAlpha.400' }}
-                >
-                  {item.icon}
-                  <Box display={{ base: 'none', md: 'block' }}>{item.text}</Box>
-                </Link>
-              </Tooltip>
-            );
-          })}
-          <ProfileLink />
+          <SidebarItems />
         </Flex>
         <Tooltip
           hasArrow

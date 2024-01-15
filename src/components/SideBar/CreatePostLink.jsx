@@ -1,12 +1,12 @@
-import { Tooltip, Box, Flex } from '@chakra-ui/react';
-import { NotificationsLogo } from '../../assets/Constants';
+import { Box, Flex, Tooltip } from '@chakra-ui/react';
+import { CreatePostLogo } from '../../assets/Constants';
 
-const NotifictionIcon = () => {
+const CreatePostLink = () => {
   return (
     <>
       <Tooltip
         hasArrow
-        label={'Notifications'}
+        label={'Create'}
         placement='right'
         ml={1}
         openDelay={500}
@@ -21,12 +21,11 @@ const NotifictionIcon = () => {
           w={{ base: 10, md: 'full' }}
           justifyContent={{ base: 'center', md: 'flex-start' }}
         >
-          <NotificationsLogo />
-          <Box display={{ base: 'none', md: 'block' }}>Notifications</Box>
+          <CreatePostLogo />
+          <Box display={{ base: 'none', md: 'block' }}>Create</Box>
         </Flex>
       </Tooltip>
     </>
   );
 };
-
-export default NotifictionIcon;
+export default CreatePostLink;

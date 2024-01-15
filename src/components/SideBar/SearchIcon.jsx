@@ -1,12 +1,13 @@
-import { Tooltip, Box, Flex } from '@chakra-ui/react';
-import { NotificationsLogo } from '../../assets/Constants';
+import React from 'react';
+import { Box, Flex, Tooltip } from '@chakra-ui/react';
+import { SearchLogo } from '../../assets/Constants';
 
-const NotifictionIcon = () => {
+const SearchIcon = () => {
   return (
     <>
       <Tooltip
         hasArrow
-        label={'Notifications'}
+        label={'Search'}
         placement='right'
         ml={1}
         openDelay={500}
@@ -21,12 +22,11 @@ const NotifictionIcon = () => {
           w={{ base: 10, md: 'full' }}
           justifyContent={{ base: 'center', md: 'flex-start' }}
         >
-          <NotificationsLogo />
-          <Box display={{ base: 'none', md: 'block' }}>Notifications</Box>
+          <SearchLogo />
+          <Box display={{ base: 'none', md: 'block' }}>Search</Box>
         </Flex>
       </Tooltip>
     </>
   );
 };
-
-export default NotifictionIcon;
+export default SearchIcon;

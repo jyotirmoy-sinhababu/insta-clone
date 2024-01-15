@@ -1,4 +1,6 @@
 import { AiFillHome } from 'react-icons/ai';
+import { Tooltip, Box, Link } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 
 const HomeLink = () => {
   return (
