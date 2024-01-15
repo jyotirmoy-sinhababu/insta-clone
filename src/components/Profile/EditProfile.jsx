@@ -16,8 +16,6 @@ import {
   Stack,
 } from '@chakra-ui/react';
 
-import { FaUser } from 'react-icons/fa';
-
 import { useState, useRef } from 'react';
 import usePreviewImg from '../../hooks/usePreviewImg';
 import useEditProfile from '../../hooks/useEditProfile';
@@ -26,18 +24,17 @@ import useShowToast from '../../hooks/useShowToast';
 import { useSelector } from 'react-redux';
 
 const EditProfile = ({ isOpen, onClose }) => {
+  const authUser = useSelector((state) => state.auth.user);
   const [inputs, setInputs] = useState({
-    fullName: '',
-    userName: '',
-    bio: '',
+    fullName: authUser.fullName,
+    userName: authUser.userName,
+    bio: authUser.bio,
   });
   const fileRef = useRef();
 
   const { selectedFile, handleImg, setSelectedFile } = usePreviewImg();
   const { isUpdating, editProfile } = useEditProfile();
   const showToast = useShowToast();
-
-  const authUser = useSelector((state) => state.auth.user);
 
   const handleEditProfile = async () => {
     try {
@@ -80,9 +77,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                     <Center>
                       <Avatar
                         size='xl'
-                        src={
-                          selectedFile || authUser.profilePicURL || <FaUser />
-                        }
+                        src={selectedFile || authUser.profilePicURL}
                         border={'2px solid white '}
                       />
                     </Center>
@@ -106,7 +101,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                     placeholder={'Full Name'}
                     size={'sm'}
                     type={'text'}
-                    value={inputs.fullName || authUser.fullName}
+                    value={inputs.fullName}
                     onChange={(e) =>
                       setInputs({ ...inputs, fullName: e.target.value })
                     }
@@ -119,7 +114,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                     placeholder={'Username'}
                     size={'sm'}
                     type={'text'}
-                    value={inputs.userName || authUser.userName}
+                    value={inputs.userName}
                     onChange={(e) =>
                       setInputs({ ...inputs, userName: e.target.value })
                     }
@@ -132,7 +127,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                     placeholder={'Bio'}
                     size={'sm'}
                     type={'text'}
-                    value={inputs.bio || authUser.bio}
+                    value={inputs.bio}
                     onChange={(e) =>
                       setInputs({ ...inputs, bio: e.target.value })
                     }
