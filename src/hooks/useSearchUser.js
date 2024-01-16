@@ -15,7 +15,7 @@ const useSearchUser = () => {
     try {
       const q = query(
         collection(firestore, 'users'),
-        where('username', '==', username)
+        where('userName', '==', username)
       );
 
       const querySnapshot = await getDocs(q);
