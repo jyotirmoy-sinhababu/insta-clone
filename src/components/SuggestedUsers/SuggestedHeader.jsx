@@ -1,23 +1,24 @@
 import { Avatar, Button, Flex, Text } from '@chakra-ui/react';
 import useLogout from '../../hooks/useLogout';
-import useAuthStore from '../../store/authStore';
 import { Link } from 'react-router-dom';
+
+import { useSelector } from 'react-redux';
 
 const SuggestedHeader = () => {
   const { handleLogout, isLoggingOut } = useLogout();
-  const authUser = useAuthStore((state) => state.user);
+  const authUser = useSelector((state) => state.auth.user);
 
   if (!authUser) return null;
 
   return (
     <Flex justifyContent={'space-between'} alignItems={'center'} w={'full'}>
       <Flex alignItems={'center'} gap={2}>
-        <Link to={`${authUser.username}`}>
+        <Link to={`${authUser.userName}`}>
           <Avatar size={'lg'} src={authUser.profilePicURL} />
         </Link>
-        <Link to={`${authUser.username}`}>
+        <Link to={`${authUser.userName}`}>
           <Text fontSize={12} fontWeight={'bold'}>
-            {authUser.username}
+            {authUser.userName}
           </Text>
         </Link>
       </Flex>

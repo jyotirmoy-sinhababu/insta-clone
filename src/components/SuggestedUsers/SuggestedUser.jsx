@@ -1,8 +1,25 @@
 import { Avatar, Box, Button, Flex, VStack } from '@chakra-ui/react';
-import { useState } from 'react';
 
-const SuggestedUser = ({ user }) => {
-  const [isFollowing, setIsFollowing] = useState();
+import { useSelector } from 'react-redux';
+
+import useFollowUser from '../../hooks/useFollowUser';
+
+const SuggestedUser = ({ user, setUser }) => {
+  const authUser = useSelector((state) => state.auth.user);
+  const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(user.uid);
+
+  console.log(user.uid);
+
+  const onFollowUser = async () => {
+    await handleFollowUser();
+    setUser({
+      ...user,
+      followers: isFollowing
+        ? user.followers.filter((follower) => follower.uid !== authUser.uid)
+        : [...user.followers, authUser],
+    });
+  };
+
   return (
     <Flex justifyContent={'space-between'} alignItems={'center'} w={'full'}>
       <Flex alignItems={'center'} gap={2}>
@@ -16,22 +33,24 @@ const SuggestedUser = ({ user }) => {
           </Box>
         </VStack>
       </Flex>
-      <Button
-        fontSize={13}
-        bg={'transparent'}
-        p={0}
-        h={'max-content'}
-        fontWeight={'medium'}
-        color={'blue.400'}
-        cursor={'pointer'}
-        _hover={{ color: 'white' }}
-        onClick={() => {
-          setIsFollowing(!isFollowing);
-        }}
-        // isLoading={isUpdating}
-      >
-        {isFollowing ? 'Unfollow' : 'Follow'}
-      </Button>
+      {authUser.uid !== user.uid ? (
+        <Button
+          fontSize={13}
+          bg={'transparent'}
+          p={0}
+          h={'max-content'}
+          fontWeight={'medium'}
+          color={'blue.400'}
+          cursor={'pointer'}
+          _hover={{ color: 'white' }}
+          onClick={() => {
+            onFollowUser();
+          }}
+          isLoading={isUpdating}
+        >
+          {isFollowing ? 'Unfollow' : 'Follow'}
+        </Button>
+      ) : null}
     </Flex>
   );
 };
