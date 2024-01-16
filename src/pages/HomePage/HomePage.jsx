@@ -1,6 +1,7 @@
 import { Container, Flex, Box } from '@chakra-ui/react';
 
 import FeedPosts from '../../components/FeedPosts/FeedPosts';
+import SuggestedUsers from '../../components/SuggestedUsers/SuggestedUsers';
 
 const HomePage = () => {
   return (
@@ -15,7 +16,7 @@ const HomePage = () => {
           display={{ base: 'none', lg: 'block' }}
           maxW={'300px'}
         >
-          Suggested
+          <SuggestedUsers />
         </Box>
       </Flex>
     </Container>
