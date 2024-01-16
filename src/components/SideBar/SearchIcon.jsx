@@ -63,7 +63,7 @@ const SearchIcon = () => {
             <form onSubmit={handleSearchUser}>
               <FormControl>
                 <FormLabel>Username</FormLabel>
-                <Input placeholder='asaprogrammer' ref={searchRef} />
+                <Input placeholder='search by username' ref={searchRef} />
               </FormControl>
 
               <Flex w={'full'} justifyContent={'flex-end'}>
