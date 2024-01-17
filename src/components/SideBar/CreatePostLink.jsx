@@ -1,3 +1,5 @@
+import { useState, useRef } from 'react';
+
 import {
   Box,
   Flex,
@@ -14,12 +16,19 @@ import {
   ModalFooter,
   ModalBody,
 } from '@chakra-ui/react';
-import { CreatePostLogo } from '../../assets/Constants';
 
+import { CreatePostLogo } from '../../assets/Constants';
 import { BsFillImageFill } from 'react-icons/bs';
 
+import { usePreviewImg } from '../../hooks/usePreviewImg';
+
 const CreatePostLink = () => {
+  const [caption, setCaption] = useState('');
+  const imgRef = useRef(null);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { selectedFile, setSelectedFile, handleImg } = usePreviewImg();
+
   return (
     <>
       <Tooltip
@@ -51,9 +60,15 @@ const CreatePostLink = () => {
           <ModalHeader>Create Post</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <Textarea placeholder='Post caption...' />
+            <Textarea
+              placeholder='Post caption...'
+              value={caption}
+              onChange={(e) => {
+                setCaption(e.target.value);
+              }}
+            />
 
-            <Input type='file' hidden />
+            <Input type='file' hidden ref={imgRef} onChange={handleImg} />
 
             <BsFillImageFill
               style={{
@@ -62,7 +77,28 @@ const CreatePostLink = () => {
                 cursor: 'pointer',
               }}
               size={16}
+              onClick={() => {
+                imgRef.current.click();
+              }}
             />
+            {selectedFile && (
+              <Flex
+                mt={5}
+                w={'full'}
+                position={'relative'}
+                justifyContent={'center'}
+              >
+                <Image src={selectedFile} alt='Selected img' />
+                <CloseButton
+                  position={'absolute'}
+                  top={2}
+                  right={2}
+                  onClick={() => {
+                    setSelectedFile(null);
+                  }}
+                />
+              </Flex>
+            )}
           </ModalBody>
 
           <ModalFooter>
