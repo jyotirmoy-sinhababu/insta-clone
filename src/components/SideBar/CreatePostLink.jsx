@@ -2,25 +2,27 @@ import { useState, useRef } from 'react';
 
 import {
   Box,
-  Flex,
-  Tooltip,
-  Textarea,
-  Input,
   Button,
-  useDisclosure,
+  CloseButton,
+  Flex,
+  Image,
+  Input,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalFooter,
   ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Textarea,
+  Tooltip,
+  useDisclosure,
 } from '@chakra-ui/react';
 
 import { CreatePostLogo } from '../../assets/Constants';
 import { BsFillImageFill } from 'react-icons/bs';
 
-import { usePreviewImg } from '../../hooks/usePreviewImg';
+import usePreviewImg from '../../hooks/usePreviewImg';
 
 const CreatePostLink = () => {
   const [caption, setCaption] = useState('');
