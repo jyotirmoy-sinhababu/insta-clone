@@ -26,13 +26,13 @@ const ProfilePosts = () => {
           </VStack>
         ))}
 
-      {!isLoading && (
+      {!isLoading && posts ? (
         <>
           {posts.map((post) => (
             <ProfilePost post={post} key={post.id} />
           ))}
         </>
-      )}
+      ) : null}
     </Grid>
   );
 };
