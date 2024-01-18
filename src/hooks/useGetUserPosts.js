@@ -8,7 +8,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 
 const useGetUserPosts = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const userPosts = useSelector((state) => state.post.posts);
+  const posts = useSelector((state) => state.post.posts);
   const userProfile = useSelector((state) => state.profile.userProfile);
   const showToast = useShowToast();
   const dispatch = useDispatch();
