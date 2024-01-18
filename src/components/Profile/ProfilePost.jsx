@@ -15,16 +15,49 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 
+import { useState } from 'react';
+
 import { AiFillHeart } from 'react-icons/ai';
 import { FaComment } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { deletePost } from '../../slice/PostSlice';
+
+import { storage, firestore } from '../../firebase/Firebase';
+import { deleteObject, ref } from 'firebase/storage';
+import { arrayRemove, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 
 const ProfilePost = ({ post }) => {
+  const [isDeleting, setIsDeleting] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const userProfile = useSelector((state) => state.profile.userProfile);
   const authUser = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
+  const handleDelete = async () => {
+    if (!window.confirm('Are you sure you want to delete this post?')) return;
+    if (isDeleting) return;
+
+    try {
+      const imageRef = ref(storage, `posts/${post.id}`);
+      await deleteObject(imageRef);
+      const userRef = doc(firestore, 'users', authUser.uid);
+      await deleteDoc(doc(firestore, 'posts', post.id));
+
+      await updateDoc(userRef, {
+        posts: arrayRemove(post.id),
+      });
+
+      dispatch(deletePost(post.id));
+      showToast('Success', 'Post deleted successfully', 'success');
+    } catch (error) {
+      showToast('Error', error.message, 'error');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <>
       <GridItem
@@ -129,8 +162,8 @@ const ProfilePost = ({ post }) => {
                       _hover={{ bg: 'whiteAlpha.300', color: 'red.600' }}
                       borderRadius={4}
                       p={1}
-                      // onClick={handleDeletePost}
-                      // isLoading={isDeleting}
+                      onClick={handleDelete}
+                      isLoading={isDeleting}
                     >
                       <MdDelete size={20} cursor='pointer' />
                     </Button>
