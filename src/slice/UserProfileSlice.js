@@ -12,8 +12,11 @@ const UserProfileSlice = createSlice({
     userAbsent: (state) => {
       state.userProfile = null;
     },
+    addPost: (state, action) => {
+      state.userProfile.posts = [action.payload, ...state.userProfile.posts];
+    },
   },
 });
 
-export const { userPresent, userAbsent } = UserProfileSlice.actions;
+export const { userPresent, userAbsent, addPost } = UserProfileSlice.actions;
 export default UserProfileSlice.reducer;
