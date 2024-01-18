@@ -118,7 +118,7 @@ const ProfilePost = ({ post }) => {
                       name='As a Programmer'
                     />
                     <Text fontWeight={'bold'} fontSize={12}>
-                      {userProfile.username}
+                      {userProfile.userName}
                     </Text>
                   </Flex>
 
