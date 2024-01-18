@@ -26,7 +26,6 @@ const useEditProfile = () => {
 
     let URL = '';
     try {
-      debugger;
       if (selectedFile) {
         await uploadString(storageRef, selectedFile, 'data_url');
         URL = await getDownloadURL(ref(storage, `profilePics/${authUser.uid}`));

@@ -1,5 +1,5 @@
 import { Box, Flex, Link, Text, VStack } from '@chakra-ui/react';
-import { FaLinkedin } from 'react-icons/fa6';
+import { FaGithub } from 'react-icons/fa';
 
 import SuggestedUser from './SuggestedUser';
 import SuggestedHeader from './SuggestedHeader';
@@ -45,7 +45,7 @@ const SuggestedUsers = () => {
       >
         2024 Built By
         <Link
-          href='https://www.linkedin.com/in/jyotirmoy-sinhababu-64b9a7212?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
+          href='https://github.com/jyotirmoy-sinhababu'
           target='_blank'
           color='blue.500'
           fontSize={14}
@@ -53,7 +53,7 @@ const SuggestedUsers = () => {
           alignItems={'center'}
           gap={'2'}
         >
-          <FaLinkedin />
+          <FaGithub />
           Jyotirmoy Sinhababu
         </Link>
       </Box>
