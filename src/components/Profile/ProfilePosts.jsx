@@ -26,7 +26,7 @@ const ProfilePosts = () => {
           </VStack>
         ))}
 
-      {!isLoading && posts ? (
+      {!isLoading && posts.length > 0 ? (
         <>
           {posts.map((post) => (
             <ProfilePost post={post} key={post.id} />
