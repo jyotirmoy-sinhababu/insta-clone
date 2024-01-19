@@ -5,7 +5,7 @@ import useShowToast from './useShowToast';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { firestore } from '../firebase/Firebase';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { userPresent, userAbsent } from '../slice/UserProfileSlice';
 
 const useGetUserProfileByUsername = (username) => {

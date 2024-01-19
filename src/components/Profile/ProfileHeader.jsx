@@ -87,9 +87,13 @@ const ProfileHeader = () => {
           }}
         >
           <Text>
-            <Text as='span' fontWeight={'bold'} mr={1}>
-              {userdata.posts.length}
-            </Text>
+            {userdata.posts.length > 0 ? (
+              <Text as='span' fontWeight={'bold'} mr={1}>
+                {userdata.posts.length}
+              </Text>
+            ) : (
+              '0'
+            )}{' '}
             Posts
           </Text>
           <Text>

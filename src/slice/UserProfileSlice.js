@@ -19,8 +19,8 @@ const UserProfileSlice = createSlice({
       const filteredPost = state.userProfile.posts.filter((item) => {
         return item.id !== action.payload;
       });
-      console.log(filteredPost);
       state.userProfile.posts = filteredPost;
+      console.log(state.userProfile.posts);
     },
   },
 });
