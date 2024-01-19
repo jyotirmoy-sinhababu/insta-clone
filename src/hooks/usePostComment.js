@@ -6,7 +6,7 @@ import { addComment } from '../slice/PostSlice';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { firestore } from '../firebase/Firebase';
 
-const usePostComment = ({ postId }) => {
+const usePostComment = () => {
   const [isCommenting, setIsCommenting] = useState(false);
   const showToast = useShowToast();
   const authUser = useSelector((state) => state.auth.user);
@@ -23,16 +23,26 @@ const usePostComment = ({ postId }) => {
       createdBy: authUser.uid,
       postId,
     };
+    const newPostComment = {
+      comment: newComment,
+      postId: postId,
+    };
+
     try {
       await updateDoc(doc(firestore, 'postId'), {
         comments: arrayUnion(newComment),
       });
+      dispatch(addComment(newPostComment));
     } catch (error) {
       showToast('Error', error.message, 'error');
+      console.log(error);
     } finally {
       setIsCommenting(false);
     }
   };
+  {
+    return { isCommenting, handleComment };
+  }
 };
 
 export default usePostComment;

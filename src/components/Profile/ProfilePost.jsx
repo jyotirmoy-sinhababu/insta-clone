@@ -30,6 +30,9 @@ import { storage, firestore } from '../../firebase/Firebase';
 import { deleteObject, ref } from 'firebase/storage';
 import { arrayRemove, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 
+import PostFooter from '../FeedPosts/PostFooter';
+import Comment from '../comment/Comment';
+
 const ProfilePost = ({ post }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -184,13 +187,13 @@ const ProfilePost = ({ post }) => {
                   {/* CAPTION */}
                   {/* {post.caption && <Caption post={post} />} */}
                   {/* COMMENTS */}
-                  {/* {post.comments.map((comment) => (
+                  {post.comments.map((comment) => (
                     <Comment key={comment.id} comment={comment} />
-                  ))} */}
+                  ))}
                 </VStack>
                 <Divider my={4} bg={'gray.8000'} />
 
-                {/* <PostFooter isProfilePage={true} post={post} /> */}
+                <PostFooter isProfilePage={true} post={post} />
               </Flex>
             </Flex>
           </ModalBody>

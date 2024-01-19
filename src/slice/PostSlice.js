@@ -18,7 +18,14 @@ const PostSlice = createSlice({
     setPost: (state, action) => {
       state.posts = action.payload;
     },
-    addComment: (state, action) => {},
+    addComment: (state, action) => {
+      const { postId, comment } = action.payload;
+      state.posts = state.posts.map((post) => {
+        post.id === postId
+          ? { ...post, comments: [...post.comments, comment.newComment] }
+          : post;
+      });
+    },
   },
 });
 

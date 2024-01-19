@@ -8,15 +8,26 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+
 import {
   NotificationsLogo,
   UnlikeLogo,
   CommentLogo,
 } from '../../assets/Constants';
 
-const PostFooter = () => {
+import usePostComment from '../../hooks/usePostComment';
+
+const PostFooter = ({ post, isProfilePage }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState(1000);
+  const [comment, setComment] = useState('');
+
+  const { isCommenting, handleComment } = usePostComment();
+
+  const handleSubmitComment = async () => {
+    await handleComment(post.id, comment);
+    setComment('');
+  };
 
   const handleLike = () => {
     if (isLiked) {
@@ -61,6 +72,10 @@ const PostFooter = () => {
             variant={'flushed'}
             placeContent={'Add a comment...'}
             fontSize={14}
+            onChange={(e) => {
+              setComment(e.target.value);
+            }}
+            value={comment}
           />
           <InputRightElement>
             <Button
@@ -70,6 +85,8 @@ const PostFooter = () => {
               cursor={'pointer'}
               _hover={{ color: 'white' }}
               bg={'transparent'}
+              onClick={handleSubmitComment}
+              isLoading={isCommenting}
             >
               Post
             </Button>
