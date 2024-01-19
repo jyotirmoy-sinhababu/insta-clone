@@ -20,10 +20,8 @@ import { useSelector } from 'react-redux';
 
 const ProfilePage = () => {
   const { username } = useParams();
-  console.log(username);
   const { isLoading } = useGetUserProfileByUsername(username);
   const userdata = useSelector((state) => state.profile.userProfile);
-  console.log(userdata);
   const userNotFound = !isLoading && !userdata;
   if (userNotFound) {
     return <UserNotFond />;

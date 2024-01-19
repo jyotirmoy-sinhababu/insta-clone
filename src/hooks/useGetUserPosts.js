@@ -13,8 +13,6 @@ const useGetUserPosts = () => {
   const showToast = useShowToast();
   const dispatch = useDispatch();
 
-  console.log(posts);
-
   useEffect(() => {
     const getPost = async () => {
       if (!userProfile) return;

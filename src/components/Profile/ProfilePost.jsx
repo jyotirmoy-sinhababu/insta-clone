@@ -23,6 +23,8 @@ import { MdDelete } from 'react-icons/md';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { deletePost } from '../../slice/PostSlice';
+import { deleteProfilePost } from '../../slice/UserProfileSlice';
+import useShowToast from '../../hooks/useShowToast';
 
 import { storage, firestore } from '../../firebase/Firebase';
 import { deleteObject, ref } from 'firebase/storage';
@@ -34,6 +36,7 @@ const ProfilePost = ({ post }) => {
   const userProfile = useSelector((state) => state.profile.userProfile);
   const authUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+  const showToast = useShowToast();
 
   const handleDelete = async () => {
     if (!window.confirm('Are you sure you want to delete this post?')) return;
@@ -50,6 +53,7 @@ const ProfilePost = ({ post }) => {
       });
 
       dispatch(deletePost(post.id));
+      dispatch(deleteProfilePost(post.id));
       showToast('Success', 'Post deleted successfully', 'success');
     } catch (error) {
       showToast('Error', error.message, 'error');
