@@ -94,21 +94,21 @@ const ProfilePost = ({ post }) => {
             <Flex>
               <AiFillHeart size={20} />
               <Text fontWeight={'bold'} ml={2}>
-                {post.likes.length}
+                {post?.likes?.length}
               </Text>
             </Flex>
 
             <Flex>
               <FaComment size={20} />
               <Text fontWeight={'bold'} ml={2}>
-                {post.comments.length}
+                {post?.comments?.length}
               </Text>
             </Flex>
           </Flex>
         </Flex>
 
         <Image
-          src={post.imageURL}
+          src={post?.imageURL}
           alt='profile post'
           w={'100%'}
           h={'100%'}
@@ -187,9 +187,13 @@ const ProfilePost = ({ post }) => {
                   {/* CAPTION */}
                   {/* {post.caption && <Caption post={post} />} */}
                   {/* COMMENTS */}
-                  {post.comments.map((comment) => (
-                    <Comment key={comment.id} comment={comment} />
-                  ))}
+                  {post
+                    ? post?.comments?.map((comment, index) => (
+                        <div key={index}>
+                          <Comment comment={comment} />
+                        </div>
+                      ))
+                    : null}
                 </VStack>
                 <Divider my={4} bg={'gray.8000'} />
 

@@ -12,7 +12,10 @@ const usePostComment = () => {
   const authUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
-  const handleComment = async ({ postId, comment }) => {
+  const handleComment = async (postId, comment) => {
+    console.log(postId);
+    console.log(comment);
+
     if (isCommenting) return;
     if (!authUser) showToast('Error', 'you are not logged in', 'error');
     setIsCommenting(true);
@@ -29,9 +32,11 @@ const usePostComment = () => {
     };
 
     try {
-      await updateDoc(doc(firestore, 'postId'), {
+      await updateDoc(doc(firestore, 'posts', postId), {
         comments: arrayUnion(newComment),
       });
+      console.log(newComment);
+
       dispatch(addComment(newPostComment));
     } catch (error) {
       showToast('Error', error.message, 'error');

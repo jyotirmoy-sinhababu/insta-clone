@@ -22,7 +22,7 @@ const PostSlice = createSlice({
       const { postId, comment } = action.payload;
       state.posts = state.posts.map((post) => {
         post.id === postId
-          ? { ...post, comments: [...post.comments, comment.newComment] }
+          ? { ...post, comments: [...post.comments, comment] }
           : post;
       });
     },

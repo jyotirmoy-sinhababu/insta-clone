@@ -28,8 +28,10 @@ const ProfilePosts = () => {
 
       {!isLoading && posts.length > 0 ? (
         <>
-          {posts.map((post) => (
-            <ProfilePost post={post} key={post.id} />
+          {posts?.map((post, index) => (
+            <div key={index}>
+              <ProfilePost post={post} />
+            </div>
           ))}
         </>
       ) : null}
