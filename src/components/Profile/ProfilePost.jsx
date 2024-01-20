@@ -65,6 +65,8 @@ const ProfilePost = ({ post }) => {
     }
   };
 
+  console.log(post);
+
   return (
     <>
       <GridItem
@@ -142,7 +144,7 @@ const ProfilePost = ({ post }) => {
                 justifyContent={'center'}
                 alignItems={'center'}
               >
-                <Image src={post.imageURL} alt='profile post' />
+                {<Image src={post?.imageURL} alt='profile post' />}
               </Flex>
               <Flex
                 flex={1}
@@ -187,7 +189,7 @@ const ProfilePost = ({ post }) => {
                   {/* CAPTION */}
                   {/* {post.caption && <Caption post={post} />} */}
                   {/* COMMENTS */}
-                  {post
+                  {post?.comments?.length > 0
                     ? post?.comments?.map((comment, index) => (
                         <div key={index}>
                           <Comment comment={comment} />

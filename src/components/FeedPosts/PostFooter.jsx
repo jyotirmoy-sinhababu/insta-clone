@@ -25,7 +25,7 @@ const PostFooter = ({ post, isProfilePage }) => {
   const { isCommenting, handleComment } = usePostComment();
 
   const handleSubmitComment = async () => {
-    if (post.id && comment) await handleComment(post.id, comment);
+    if (post.id && comment.length > 0) await handleComment(post.id, comment);
     setComment('');
   };
   post ? console.log(post.id) : null;
