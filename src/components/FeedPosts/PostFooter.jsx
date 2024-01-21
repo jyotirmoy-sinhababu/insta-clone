@@ -28,8 +28,6 @@ const PostFooter = ({ post, isProfilePage }) => {
     if (post.id && comment.length > 0) await handleComment(post.id, comment);
     setComment('');
   };
-  post ? console.log(post.id) : null;
-  console.log(comment);
 
   const handleLike = () => {
     if (isLiked) {

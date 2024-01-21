@@ -1,6 +1,15 @@
-import { Avatar, Flex, Skeleton, SkeletonCircle, Text } from '@chakra-ui/react';
+import {
+  Avatar,
+  Flex,
+  Skeleton,
+  SkeletonCircle,
+  Text,
+  Link,
+} from '@chakra-ui/react';
 
 import useGetUserById from '../../hooks/useGetUserById';
+
+import { timeStamp } from '../../utils/timeStamp';
 
 const Comment = ({ comment }) => {
   const { isLoading, userProfile } = useGetUserById(comment.createdBy);
@@ -9,16 +18,23 @@ const Comment = ({ comment }) => {
     return <CommentSkeleton />;
   }
 
+  console.log(userProfile);
+
   return (
     <Flex gap={4}>
-      <Avatar src={userProfile.imageURL} size={'sm'} />
+      <Link to={`/${userProfile.userName}`}>
+        <Avatar src={userProfile.profilePicURL} size={'sm'} />
+      </Link>
       <Flex direction={'column'}>
         <Flex gap={2} flexDir={'column'}>
           <Text fontWeight={'bold'} fontSize={12}>
-            {userProfile.fullName}
+            {userProfile.userName}
           </Text>
           <Text fontSize={14}>{comment.comment}</Text>
         </Flex>
+        <Text fontSize={12} color={'gray'}>
+          {timeStamp(comment.createdAt)}
+        </Text>
       </Flex>
     </Flex>
   );

@@ -35,7 +35,6 @@ const usePostComment = () => {
       await updateDoc(doc(firestore, 'posts', postId), {
         comments: arrayUnion(newComment),
       });
-      console.log(newComment);
 
       dispatch(addComment(newPostComment));
     } catch (error) {
