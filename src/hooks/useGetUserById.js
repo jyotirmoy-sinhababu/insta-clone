@@ -3,7 +3,7 @@ import useShowToast from './useShowToast';
 import { getDoc, doc } from 'firebase/firestore';
 import { firestore } from '../firebase/Firebase';
 
-const useGetUserById = () => {
+const useGetUserById = (userId) => {
   const [isLoading, setIsLoading] = useState(true);
   const [userProfile, setUserProfile] = useState(null);
 
@@ -14,9 +14,9 @@ const useGetUserById = () => {
       setIsLoading(true);
       setUserProfile(null);
       try {
-        const userRef = getDoc(doc(firestore, 'users', userId));
+        const userRef = await getDoc(doc(firestore, 'users', userId));
         if (userRef.exists()) {
-          await setUserProfile(userRef.data());
+          setUserProfile(userRef.data());
         }
       } catch (error) {
         showToast('Error', error.message, 'error');
@@ -25,7 +25,7 @@ const useGetUserById = () => {
       }
     };
     getUserProfile();
-  }, [showToast, setUserProfile, userId]);
+  }, [showToast, setUserProfile, showToast]);
   return { isLoading, userProfile, setUserProfile };
 };
 
