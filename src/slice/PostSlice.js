@@ -20,11 +20,17 @@ const PostSlice = createSlice({
     },
     addComment: (state, action) => {
       const { postId, comment } = action.payload;
-      state.posts = state.posts.map((post) => {
-        post.id === postId
-          ? { ...post, comments: [...post.comments, comment] }
-          : post;
-      });
+
+      const postIndex = state.posts.findIndex((post) => post.id === postId);
+
+      if (postIndex !== -1) {
+        // Create a copy of the post to avoid modifying the original state
+        const updatedPost = { ...state.posts[postIndex] };
+        updatedPost.comments = [...updatedPost.comments, comment];
+
+        // Update the state with the modified post
+        state.posts[postIndex] = updatedPost;
+      }
     },
   },
 });
