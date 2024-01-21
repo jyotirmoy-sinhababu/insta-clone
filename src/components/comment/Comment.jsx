@@ -28,7 +28,7 @@ const Comment = ({ comment }) => {
       <Flex direction={'column'}>
         <Flex gap={2} flexDir={'column'}>
           <Text fontWeight={'bold'} fontSize={12}>
-            {userProfile.userName}
+            {userProfile.fullName}
           </Text>
           <Text fontSize={14}>{comment.comment}</Text>
         </Flex>

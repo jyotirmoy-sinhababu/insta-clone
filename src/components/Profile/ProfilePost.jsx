@@ -32,6 +32,7 @@ import { arrayRemove, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 
 import PostFooter from '../FeedPosts/PostFooter';
 import Comment from '../comment/Comment';
+import Caption from '../comment/Caption';
 
 const ProfilePost = ({ post }) => {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -64,8 +65,6 @@ const ProfilePost = ({ post }) => {
       setIsDeleting(false);
     }
   };
-
-  console.log(post);
 
   return (
     <>
@@ -187,7 +186,7 @@ const ProfilePost = ({ post }) => {
                   overflowY={'auto'}
                 >
                   {/* CAPTION */}
-                  {/* {post.caption && <Caption post={post} />} */}
+                  {post.caption && <Caption post={post} />}
                   {/* COMMENTS */}
                   {post?.comments?.length > 0
                     ? post?.comments?.map((comment, index) => (
