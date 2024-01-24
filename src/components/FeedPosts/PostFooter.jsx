@@ -16,33 +16,24 @@ import {
 } from '../../assets/Constants';
 
 import usePostComment from '../../hooks/usePostComment';
+import useLikeOrUnlike from '../../hooks/useLikeOrUnlike';
 
 const PostFooter = ({ post, isProfilePage }) => {
-  const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState(1000);
   const [comment, setComment] = useState('');
 
   const { isCommenting, handleComment } = usePostComment();
+  const { isLiked, likesCount, handleLikePost } = useLikeOrUnlike(post?.id);
 
   const handleSubmitComment = async () => {
     if (post.id && comment.length > 0) await handleComment(post.id, comment);
     setComment('');
   };
 
-  const handleLike = () => {
-    if (isLiked) {
-      setIsLiked(false);
-      setLikes(likes - 1);
-    } else {
-      setIsLiked(true);
-      setLikes(likes + 1);
-    }
-  };
-
   return (
     <Box mb={10}>
       <Flex alignItems={'center'} gap={4} w={'full'} pt={0} mb={2} mt={2}>
-        <Box onClick={handleLike} cursor={'pointer'} fontSize={18}>
+        <Box onClick={handleLikePost} cursor={'pointer'} fontSize={18}>
           {!isLiked ? <NotificationsLogo /> : <UnlikeLogo />}
         </Box>
         <Box cursor={'pointer'} fontSize={18}>
@@ -50,7 +41,7 @@ const PostFooter = ({ post, isProfilePage }) => {
         </Box>
       </Flex>
       <Text fontWeight={600} fontSize={'sm'}>
-        {likes} likes
+        {likesCount} likes
       </Text>
       <Text fontSize='sm' fontWeight={700}>
         developer_

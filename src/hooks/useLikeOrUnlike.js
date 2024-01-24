@@ -6,10 +6,10 @@ import { firestore } from '../firebase/Firebase';
 
 const useLikeOrUnlike = (post) => {
   const [isUpdating, setIsUpdating] = useState(false);
-  const authUser = useSelector((state) => state.auth.user);
+  const authUser = useSelector((state) => state?.auth.user);
 
-  const [isLiked, setIsLinked] = useState(post.likes.includes(authUser?.uid));
-  const [likesCount, setLikesCount] = useState(post.likes.length);
+  const [isLiked, setIsLinked] = useState(post?.likes?.includes(authUser?.uid));
+  const [likesCount, setLikesCount] = useState(post?.likes?.length);
 
   const showToast = useShowToast();
 
@@ -20,8 +20,8 @@ const useLikeOrUnlike = (post) => {
     setIsUpdating(true);
 
     try {
-      const postRef = doc(firestore, 'posts', post.id);
-      await updateDoc(postRef, {
+      const postRef = await doc(firestore, 'posts', post.id);
+      updateDoc(postRef, {
         likes: isLiked ? arrayRemove(authUser.uid) : arrayUnion(authUser.uid),
       });
       setIsLinked(!isLiked);
