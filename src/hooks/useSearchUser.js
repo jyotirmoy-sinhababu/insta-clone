@@ -10,6 +10,7 @@ const useSearchUser = () => {
   const showToast = useShowToast();
 
   const getUserProfile = async (username) => {
+    debugger;
     setIsLoading(true);
     setUser(null);
     try {

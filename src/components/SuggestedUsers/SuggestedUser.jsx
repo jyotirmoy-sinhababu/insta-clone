@@ -8,8 +8,6 @@ const SuggestedUser = ({ user, setUser }) => {
   const authUser = useSelector((state) => state.auth.user);
   const { isFollowing, isUpdating, handleFollowUser } = useFollowUser(user.uid);
 
-  console.log(user.uid);
-
   const onFollowUser = async () => {
     await handleFollowUser();
     setUser({
