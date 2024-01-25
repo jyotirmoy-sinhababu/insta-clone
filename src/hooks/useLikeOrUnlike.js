@@ -22,12 +22,15 @@ const useLikeOrUnlike = (post) => {
     try {
       const postRef = await doc(firestore, 'posts', post.id);
       updateDoc(postRef, {
-        likes: isLiked ? arrayRemove(authUser.uid) : arrayUnion(authUser.uid),
+        likesCount: isLiked
+          ? arrayRemove(authUser.uid)
+          : arrayUnion(authUser.uid),
       });
       setIsLinked(!isLiked);
-      isLiked ? setLikesCount(likes - 1) : setLikesCount(likes + 1);
+      isLiked ? setLikesCount(likesCount - 1) : setLikesCount(likesCount + 1);
     } catch (error) {
       showToast('Error', error.message, 'error');
+      console.log(error);
     } finally {
       setIsUpdating(false);
     }

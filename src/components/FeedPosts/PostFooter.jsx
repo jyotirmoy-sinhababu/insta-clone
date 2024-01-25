@@ -23,7 +23,7 @@ const PostFooter = ({ post, isProfilePage }) => {
   const [comment, setComment] = useState('');
 
   const { isCommenting, handleComment } = usePostComment();
-  const { isLiked, likesCount, handleLikePost } = useLikeOrUnlike(post?.id);
+  const { isLiked, likesCount, handleLikePost } = useLikeOrUnlike(post);
 
   const handleSubmitComment = async () => {
     if (post.id && comment.length > 0) await handleComment(post.id, comment);
