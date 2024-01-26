@@ -1,6 +1,13 @@
-import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
+import { Avatar, Box, Button, Flex, Text } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
-const PostHeader = ({ post }) => {
+import useFollowUser from '../../hooks/useFollowUser';
+
+const PostHeader = ({ post, createProfile }) => {
+  const { isUpdating, isFollowing, handleFollowUser } = useFollowUser(
+    post.createdBy
+  );
+
   return (
     <Flex
       justifyContent={'space-between'}
@@ -9,22 +16,34 @@ const PostHeader = ({ post }) => {
       my={2}
     >
       <Flex alignItems={'center'} gap={2}>
-        <Avatar src='/img1.png' alt='user profile pic' size={'sm'} />
+        <Link to={`/${createProfile.userName}`}>
+          <Avatar
+            src={createProfile.profilePicURL}
+            alt='user profile pic'
+            size={'sm'}
+          />
+        </Link>
+
         <Flex fontSize={12} fontWeight={'bold'} gap='2'>
-          somebody
+          <Link to={`${createProfile.userName}`}>{createProfile.userName}</Link>
+
           <Box color={'gray.500'}>.1w</Box>
         </Flex>
       </Flex>
       <Box cursor={'pointer'}>
-        <Text
+        <Button
+          size={'xs'}
+          bg={'transparent'}
           fontSize={12}
           color={'blue.500'}
           fontWeight={'bold'}
           _hover={{ color: 'white' }}
           transition={'0.2s ease-in-put'}
+          onClick={handleFollowUser}
+          isLoading={isUpdating}
         >
-          unfollow
-        </Text>
+          {isFollowing ? 'unfolow' : 'follow'}
+        </Button>
       </Box>
     </Flex>
   );
