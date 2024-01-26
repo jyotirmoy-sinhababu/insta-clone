@@ -1,6 +1,6 @@
 import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
 
-const PostHeader = () => {
+const PostHeader = ({ post }) => {
   return (
     <Flex
       justifyContent={'space-between'}

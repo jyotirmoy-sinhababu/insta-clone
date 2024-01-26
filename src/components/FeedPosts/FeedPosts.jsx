@@ -1,4 +1,11 @@
-import { Container, Skeleton, SkeletonCircle, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Skeleton,
+  SkeletonCircle,
+  VStack,
+  Flex,
+} from '@chakra-ui/react';
 
 import useGetFeedPost from '../../hooks/useGetFeedPost';
 
@@ -18,8 +25,14 @@ const FeedPosts = () => {
                 <Skeleton height='10px' w={'200px'} />
               </VStack>
             </Flex>
+            <Skeleton w={'full'}>
+              <Box h={'400px'}>contents wrapped</Box>
+            </Skeleton>
           </VStack>;
         })}
+      {!isLoading &&
+        posts.length > 0 &&
+        posts.map((post) => <FeedPost key={post.id} post={post} />)}
     </Container>
   );
 };

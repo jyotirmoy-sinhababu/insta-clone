@@ -40,7 +40,7 @@ const useGetFeedPost = () => {
       }
     };
     if (authUser) getFeedPosts();
-  }, [authUser, showToast, setPosts, setUserProfile]);
+  }, [authUser, showToast, setPost, userPresent]);
   return { isLoading, posts };
 };
 
