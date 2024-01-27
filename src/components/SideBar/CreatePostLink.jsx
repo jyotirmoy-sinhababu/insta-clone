@@ -48,6 +48,7 @@ const CreatePostLink = () => {
   const { selectedFile, setSelectedFile, handleImg } = usePreviewImg();
 
   const { isLoading, handleCreatePost } = postCreation();
+  const showToast = useShowToast();
 
   const handlePostCreation = async () => {
     try {

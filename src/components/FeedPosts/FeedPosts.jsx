@@ -5,6 +5,7 @@ import {
   SkeletonCircle,
   VStack,
   Flex,
+  Text,
 } from '@chakra-ui/react';
 
 import useGetFeedPost from '../../hooks/useGetFeedPost';
@@ -33,6 +34,9 @@ const FeedPosts = () => {
       {!isLoading &&
         posts.length > 0 &&
         posts.map((post) => <FeedPost key={post.id} post={post} />)}
+      {!isLoading && posts.length === 0 && (
+        <Text>Follow users to see post</Text>
+      )}
     </Container>
   );
 };

@@ -18,7 +18,6 @@ const useSearchUser = () => {
         collection(firestore, 'users'),
         where('userName', '==', username)
       );
-
       const querySnapshot = await getDocs(q);
       if (querySnapshot.empty)
         return showToast('Error', 'User not found', 'error');
@@ -28,6 +27,7 @@ const useSearchUser = () => {
       });
     } catch (error) {
       showToast('Error', error.message, 'error');
+      console.log(error);
       setUser(null);
     } finally {
       setIsLoading(false);
