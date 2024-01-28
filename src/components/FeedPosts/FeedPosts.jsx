@@ -33,7 +33,11 @@ const FeedPosts = () => {
         })}
       {!isLoading &&
         posts.length > 0 &&
-        posts.map((post) => <FeedPost key={post.id} post={post} />)}
+        posts.map((post) => (
+          <Container key={post.id} mt={'4'}>
+            <FeedPost post={post} />
+          </Container>
+        ))}
       {!isLoading && posts.length === 0 && (
         <Text>Follow users to see post</Text>
       )}
