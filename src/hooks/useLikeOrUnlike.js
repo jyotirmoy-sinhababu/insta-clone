@@ -9,12 +9,11 @@ const useLikeOrUnlike = (post) => {
   const authUser = useSelector((state) => state?.auth.user);
 
   const [isLiked, setIsLinked] = useState(post?.likes?.includes(authUser?.uid));
-  const [likesCount, setLikesCount] = useState(post?.likes?.length);
+  const [likesCount, setLikesCount] = useState(post?.likesCount?.length);
 
   const showToast = useShowToast();
 
   const handleLikePost = async () => {
-    debugger;
     if (isUpdating) return;
 
     if (!authUser) return showToast('Error', error.message, 'error');
@@ -23,7 +22,9 @@ const useLikeOrUnlike = (post) => {
     try {
       const postRef = await doc(firestore, 'posts', post.id);
       updateDoc(postRef, {
-        likes: isLiked ? arrayRemove(authUser.uid) : arrayUnion(authUser.uid),
+        likesCount: isLiked
+          ? arrayRemove(authUser.uid)
+          : arrayUnion(authUser.uid),
       });
       setIsLinked(!isLiked);
       isLiked ? setLikesCount(likesCount - 1) : setLikesCount(likesCount + 1);

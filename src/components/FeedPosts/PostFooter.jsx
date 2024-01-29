@@ -40,9 +40,9 @@ const PostFooter = ({ post, isProfilePage }) => {
         </Box>
       </Flex>
       <Text fontWeight={600} fontSize={'sm'} display={'flex'}>
-        {likesCount.length > 0 ? (
+        {likesCount ? (
           <Text fontWeight={600} fontSize={'sm'}>
-            {likesCount.length}
+            {likesCount}
           </Text>
         ) : (
           <Text>0 </Text>
@@ -51,13 +51,12 @@ const PostFooter = ({ post, isProfilePage }) => {
       </Text>
 
       <Text fontSize='sm' fontWeight={700}>
-        developer_
         <Text as='span' fontWeight={400}>
-          Feeling good
+          {post.caption}
         </Text>
       </Text>
       <Text fontSize='sm' color={'grey'}>
-        View all comments
+        View {post.comments.length} comments
       </Text>
       <Flex
         alignItems={'center'}

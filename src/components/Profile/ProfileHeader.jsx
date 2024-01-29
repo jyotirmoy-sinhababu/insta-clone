@@ -97,26 +97,20 @@ const ProfileHeader = () => {
             Posts
           </Text>
 
-          <Text>
-            {userdata.followers.length > 0 ? (
-              <Text as='span' fontWeight={'bold'} mr={1}>
-                {userdata.followers.length}
-              </Text>
-            ) : (
-              '0 '
-            )}
-            Followers
-          </Text>
-          <Text>
-            {userdata.following.length > 0 ? (
-              <Text as='span' fontWeight={'bold'} mr={1}>
-                {userdata.following.length}
-              </Text>
-            ) : (
-              '0'
-            )}
-            Following
-          </Text>
+          {userdata.followers.length > 0 ? (
+            <Text as='span' fontWeight={'bold'} mr={1}>
+              {userdata.followers.length} Followers
+            </Text>
+          ) : (
+            '0 '
+          )}
+          {userdata.following.length > 0 ? (
+            <Text as='span' fontWeight={'bold'} mr={1}>
+              {userdata.following.length} Following
+            </Text>
+          ) : (
+            '0 '
+          )}
         </Flex>
         <Flex alignItems={'center'} gap={4}>
           <Text fontSize={'sm'} fontWeight={'bold'}>
