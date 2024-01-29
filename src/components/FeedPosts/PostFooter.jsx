@@ -19,7 +19,6 @@ import usePostComment from '../../hooks/usePostComment';
 import useLikeOrUnlike from '../../hooks/useLikeOrUnlike';
 
 const PostFooter = ({ post, isProfilePage }) => {
-  const [likes, setLikes] = useState(1000);
   const [comment, setComment] = useState('');
 
   const { isCommenting, handleComment } = usePostComment();
@@ -40,9 +39,17 @@ const PostFooter = ({ post, isProfilePage }) => {
           <CommentLogo />
         </Box>
       </Flex>
-      <Text fontWeight={600} fontSize={'sm'}>
-        {likesCount} likes
+      <Text fontWeight={600} fontSize={'sm'} display={'flex'}>
+        {likesCount.length > 0 ? (
+          <Text fontWeight={600} fontSize={'sm'}>
+            {likesCount.length}
+          </Text>
+        ) : (
+          <Text>0 </Text>
+        )}
+        <Text>likes</Text>
       </Text>
+
       <Text fontSize='sm' fontWeight={700}>
         developer_
         <Text as='span' fontWeight={400}>
@@ -50,7 +57,7 @@ const PostFooter = ({ post, isProfilePage }) => {
         </Text>
       </Text>
       <Text fontSize='sm' color={'grey'}>
-        View all 1,000 comments
+        View all comments
       </Text>
       <Flex
         alignItems={'center'}

@@ -96,16 +96,25 @@ const ProfileHeader = () => {
             )}{' '}
             Posts
           </Text>
+
           <Text>
-            <Text as='span' fontWeight={'bold'} mr={1}>
-              {userdata.followers.length}
-            </Text>
+            {userdata.followers.length > 0 ? (
+              <Text as='span' fontWeight={'bold'} mr={1}>
+                {userdata.followers.length}
+              </Text>
+            ) : (
+              '0 '
+            )}
             Followers
           </Text>
           <Text>
-            <Text as='span' fontWeight={'bold'} mr={1}>
-              {userdata.following.length}
-            </Text>
+            {userdata.following.length > 0 ? (
+              <Text as='span' fontWeight={'bold'} mr={1}>
+                {userdata.following.length}
+              </Text>
+            ) : (
+              '0'
+            )}
             Following
           </Text>
         </Flex>
