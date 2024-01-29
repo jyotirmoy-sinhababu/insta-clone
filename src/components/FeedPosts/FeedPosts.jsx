@@ -14,6 +14,7 @@ import FeedPost from './FeedPost';
 
 const FeedPosts = () => {
   const { isLoading, posts } = useGetFeedPost();
+  console.log(isLoading);
   return (
     <Container maxW={'container.sm'} py={10} px={2}>
       {isLoading &&
@@ -22,8 +23,8 @@ const FeedPosts = () => {
             <Flex gap='2'>
               <SkeletonCircle size='10' />
               <VStack gap={2} alignItems={'flex-start'}>
-                <Skeleton height='10px' w={'200px'} />
-                <Skeleton height='10px' w={'200px'} />
+                <Skeleton height='400px' w={'200px'} />
+                <Skeleton height='400px' w={'200px'} />
               </VStack>
             </Flex>
             <Skeleton w={'full'}>
@@ -34,7 +35,7 @@ const FeedPosts = () => {
       {!isLoading &&
         posts.length > 0 &&
         posts.map((post) => (
-          <Container key={post.id} mt={'4'}>
+          <Container key={post.id} sx={{ gap: '18px' }}>
             <FeedPost post={post} />
           </Container>
         ))}

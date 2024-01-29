@@ -14,6 +14,7 @@ const useLikeOrUnlike = (post) => {
   const showToast = useShowToast();
 
   const handleLikePost = async () => {
+    debugger;
     if (isUpdating) return;
 
     if (!authUser) return showToast('Error', error.message, 'error');
