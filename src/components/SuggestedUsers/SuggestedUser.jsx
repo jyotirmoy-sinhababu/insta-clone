@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Flex, VStack } from '@chakra-ui/react';
+import { Avatar, Box, Button, Flex, Tooltip, VStack } from '@chakra-ui/react';
 
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -14,7 +14,7 @@ const SuggestedUser = ({ user, setUser }) => {
   };
 
   return (
-    <Flex justifyContent={'space-between'} alignItems={'center'} w={'full'}>
+    <Flex justifyContent={'space-between'} alignItems={'center'} gap={20}>
       <Flex alignItems={'center'} gap={2}>
         <Link to={`/${user.userName}`}>
           <Avatar src={user.profilePicURL} size={'md'} />
@@ -22,12 +22,20 @@ const SuggestedUser = ({ user, setUser }) => {
         <VStack spacing={2} alignItems={'flex-start'}>
           <Link to={`/${user.userName}`}>
             {' '}
-            <Box fontSize={12} fontWeight={'bold'}>
+            <Box
+              display={{ base: 'none', lg: 'block' }}
+              fontSize={12}
+              fontWeight={'bold'}
+            >
               {user.fullName}
             </Box>{' '}
           </Link>
 
-          <Box display={{ base: 'none' }} fontSize={11} color={'gray.500'}>
+          <Box
+            display={{ base: 'none', lg: 'block' }}
+            fontSize={11}
+            color={'gray.500'}
+          >
             {user.followers.length} followers
           </Box>
         </VStack>
@@ -35,7 +43,7 @@ const SuggestedUser = ({ user, setUser }) => {
       {authUser.uid !== user.uid ? (
         <Button
           fontSize={13}
-          display={{ base: 'none' }}
+          display={{ base: 'none', lg: 'block' }}
           bg={'transparent'}
           p={0}
           h={'max-content'}

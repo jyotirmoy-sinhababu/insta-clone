@@ -26,15 +26,22 @@ const SuggestedUsers = () => {
             fontWeight={'bold'}
             _hover={{ color: 'gray.400' }}
             cursor={'pointer'}
-            display={{ base: 'none' }}
+            display={{ base: 'none', lg: 'block' }}
           >
             See All
           </Text>
         </Flex>
       )}
-      {suggestedUser?.map((user) => {
-        return <SuggestedUser user={user} key={user.id} />;
-      })}
+      <Box display={{ base: 'flex', lg: ' block' }}>
+        {suggestedUser?.map((user) => {
+          return (
+            <Box key={user.id} mt={5}>
+              <SuggestedUser user={user} />
+            </Box>
+          );
+        })}
+      </Box>
+
       <Box
         fontSize={12}
         color={'grey.500'}
