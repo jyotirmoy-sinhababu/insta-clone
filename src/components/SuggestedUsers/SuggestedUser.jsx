@@ -11,14 +11,6 @@ const SuggestedUser = ({ user, setUser }) => {
 
   const onFollowUser = async () => {
     await handleFollowUser();
-    user
-      ? setUser({
-          ...user,
-          followers: isFollowing
-            ? user.followers.filter((follower) => follower !== authUser.uid)
-            : [...user.followers, authUser],
-        })
-      : null;
   };
 
   return (
@@ -35,7 +27,7 @@ const SuggestedUser = ({ user, setUser }) => {
             </Box>{' '}
           </Link>
 
-          <Box fontSize={11} color={'gray.500'}>
+          <Box display={{ base: 'none' }} fontSize={11} color={'gray.500'}>
             {user.followers.length} followers
           </Box>
         </VStack>
@@ -43,6 +35,7 @@ const SuggestedUser = ({ user, setUser }) => {
       {authUser.uid !== user.uid ? (
         <Button
           fontSize={13}
+          display={{ base: 'none' }}
           bg={'transparent'}
           p={0}
           h={'max-content'}

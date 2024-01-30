@@ -39,7 +39,13 @@ const FeedPosts = () => {
           </Container>
         ))}
       {!isLoading && posts.length === 0 && (
-        <Text>Follow users to see post</Text>
+        <Container
+          display={'flex'}
+          justifyContent={'center'}
+          alignItems={'center'}
+        >
+          <Text fontSize={'2xl'}>Follow users to see their post.</Text>
+        </Container>
       )}
     </Container>
   );

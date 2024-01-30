@@ -26,6 +26,7 @@ const SuggestedUsers = () => {
             fontWeight={'bold'}
             _hover={{ color: 'gray.400' }}
             cursor={'pointer'}
+            display={{ base: 'none' }}
           >
             See All
           </Text>
@@ -39,7 +40,7 @@ const SuggestedUsers = () => {
         color={'grey.500'}
         mt={5}
         alignSelf={'start'}
-        display={'flex'}
+        display={{ base: 'none', lg: 'flex' }}
         alignItems={'center'}
         gap={'2'}
       >
