@@ -18,7 +18,7 @@ import {
 import usePostComment from '../../hooks/usePostComment';
 import useLikeOrUnlike from '../../hooks/useLikeOrUnlike';
 
-const PostFooter = ({ post, isProfilePage }) => {
+const PostFooter = ({ post, isProfilePage, userProfile }) => {
   const [comment, setComment] = useState('');
 
   const { isCommenting, handleComment } = usePostComment();
@@ -45,7 +45,7 @@ const PostFooter = ({ post, isProfilePage }) => {
             {likesCount}
           </Text>
         ) : (
-          <Text>0 </Text>
+          '0 '
         )}
         <Text>likes</Text>
       </Text>

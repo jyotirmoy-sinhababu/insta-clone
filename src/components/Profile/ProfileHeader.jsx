@@ -93,7 +93,7 @@ const ProfileHeader = () => {
               </Text>
             ) : (
               '0'
-            )}{' '}
+            )}
             Posts
           </Text>
 
