@@ -86,32 +86,31 @@ const ProfileHeader = () => {
             sm: 4,
           }}
         >
-          <Text>
-            {userdata.posts.length > 0 ? (
-              <Text as='span' fontWeight={'bold'} mr={1}>
-                {userdata.posts.length}
-              </Text>
-            ) : (
-              '0'
-            )}
-            Posts
-          </Text>
+          {userdata.posts.length > 0 ? (
+            <Text as='span' fontWeight={'bold'} mr={1}>
+              {userdata.posts.length} Posts
+            </Text>
+          ) : (
+            <Text>0 Posts </Text>
+          )}
 
           {userdata.followers.length > 0 ? (
             <Text as='span' fontWeight={'bold'} mr={1}>
               {userdata.followers.length} Followers
             </Text>
           ) : (
-            '0 '
+            <Text>0 Followers</Text>
           )}
+
           {userdata.following.length > 0 ? (
             <Text as='span' fontWeight={'bold'} mr={1}>
               {userdata.following.length} Following
             </Text>
           ) : (
-            '0 '
+            <Text>0 Following</Text>
           )}
         </Flex>
+
         <Flex alignItems={'center'} gap={4}>
           <Text fontSize={'sm'} fontWeight={'bold'}>
             {userdata.fullName}
