@@ -14,7 +14,6 @@ import FeedPost from './FeedPost';
 
 const FeedPosts = () => {
   const { isLoading, posts } = useGetFeedPost();
-  console.log(isLoading);
   return (
     <Container maxW={'container.sm'} py={10} px={2}>
       {isLoading &&

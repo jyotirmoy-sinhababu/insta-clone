@@ -20,7 +20,6 @@ const UserProfileSlice = createSlice({
         return item.id !== action.payload;
       });
       state.userProfile.posts = filteredPost;
-      console.log(state.userProfile.posts);
     },
   },
 });

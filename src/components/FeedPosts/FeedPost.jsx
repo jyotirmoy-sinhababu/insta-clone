@@ -19,7 +19,7 @@ const FeedPost = ({ post }) => {
       <Box my={2} borderRadius={4} overflow={'hidden'}>
         <Image src={post.imageURL} alt='post' />
       </Box>
-      <PostFooter post={post} userProfile={userProfile} />
+      <PostFooter post={post} createProfile={userProfile} />
     </Container>
   );
 };

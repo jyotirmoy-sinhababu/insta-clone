@@ -18,8 +18,6 @@ const Comment = ({ comment }) => {
     return <CommentSkeleton />;
   }
 
-  console.log(userProfile);
-
   return (
     <Flex gap={4}>
       <Link to={`/${userProfile.userName}`}>
