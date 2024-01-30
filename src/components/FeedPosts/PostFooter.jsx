@@ -6,8 +6,9 @@ import {
   InputRightElement,
   Button,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import {
   NotificationsLogo,
@@ -19,13 +20,17 @@ import { useSelector } from 'react-redux';
 
 import usePostComment from '../../hooks/usePostComment';
 import useLikeOrUnlike from '../../hooks/useLikeOrUnlike';
+import CommentModal from '../Modals/CommentModal';
+import { timeStamp } from '../../utils/timeStamp';
 
 const PostFooter = ({ post, isProfilePage, createProfile }) => {
   const [comment, setComment] = useState('');
 
   const { isCommenting, handleComment } = usePostComment();
   const { isLiked, likesCount, handleLikePost } = useLikeOrUnlike(post);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const commentRef = useRef(null);
   const authUser = useSelector((state) => state.auth.user);
 
   const handleSubmitComment = async () => {
@@ -49,19 +54,19 @@ const PostFooter = ({ post, isProfilePage, createProfile }) => {
         </Box>
       </Flex>
       <Text fontWeight={600} fontSize={'sm'}>
-        {likes} likes
+        {likesCount} likes
       </Text>
 
       {isProfilePage && (
         <Text fontSize='12' color={'gray'}>
-          Posted {timeAgo(post.createdAt)}
+          Posted {timeStamp(post.createdAt)}
         </Text>
       )}
 
       {!isProfilePage && (
         <>
           <Text fontSize='sm' fontWeight={700}>
-            {creatorProfile?.username}{' '}
+            {createProfile?.username}{' '}
             <Text as='span' fontWeight={400}>
               {post.caption}
             </Text>
@@ -78,7 +83,7 @@ const PostFooter = ({ post, isProfilePage, createProfile }) => {
           )}
           {/* COMMENTS MODAL ONLY IN THE HOME PAGE */}
           {isOpen ? (
-            <CommentsModal isOpen={isOpen} onClose={onClose} post={post} />
+            <CommentModal isOpen={isOpen} onClose={onClose} post={post} />
           ) : null}
         </>
       )}
