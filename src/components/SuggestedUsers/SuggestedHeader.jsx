@@ -15,7 +15,7 @@ const SuggestedHeader = () => {
       justifyContent={'space-between'}
       alignItems={'center'}
       w={'full'}
-      display={{ base: 'none' }}
+      display={{ base: 'none', lg: 'flex' }}
     >
       <Flex alignItems={'center'} gap={2}>
         <Link to={`${authUser.userName}`}>
